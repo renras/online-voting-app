@@ -1,5 +1,6 @@
 import styles from "./Form.module.scss";
 import Label from "components/Label/Label";
+import Input from "components/Input/Input";
 
 const Form = () => {
   return (
@@ -11,6 +12,7 @@ const Form = () => {
       <Label htmlFor="username" className={styles.label}>
         Username
       </Label>
+      <Input id="username" className={styles.input} />
     </form>
   );
 };

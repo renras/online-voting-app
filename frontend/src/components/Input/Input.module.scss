@@ -1,0 +1,13 @@
+@use "styles/variables" as *;
+
+.input {
+  width: 100%;
+  border: 1px solid $border;
+  height: 48px;
+  border-radius: 4px;
+  padding: 1em;
+
+  &:focus {
+    border: 1px solid $purple;
+  }
+}
