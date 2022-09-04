@@ -1,8 +1,11 @@
+import logo from "assets/images/logo-light.jpg";
+
 const Login = () => {
   return (
-    <div>
+    <main>
+      <img src={logo} alt="logo" />
       <h1>Login</h1>
-    </div>
+    </main>
   );
 };
 
