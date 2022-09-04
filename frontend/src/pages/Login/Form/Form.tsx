@@ -9,10 +9,17 @@ const Form = () => {
         <h2 className={styles.active}>Login</h2>
         <h2>Register</h2>
       </div>
+
+      {/* username */}
       <Label htmlFor="username" className={styles.label}>
         Username
       </Label>
       <Input id="username" className={styles.input} />
+
+      <Label htmlFor="password" className={styles.label}>
+        Password
+      </Label>
+      <Input id="password" type="password" className={styles.input} />
     </form>
   );
 };

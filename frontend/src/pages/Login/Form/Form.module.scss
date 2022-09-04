@@ -30,7 +30,11 @@
 .label {
   display: block;
   width: 100%;
-  margin-top: 64px;
+  margin-top: 32px;
+
+  &:nth-of-type(1) {
+    margin-top: 64px;
+  }
 }
 
 .input {
