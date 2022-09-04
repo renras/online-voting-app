@@ -1,0 +1,16 @@
+@use "styles/variables" as *;
+
+.main {
+  padding: 32px;
+}
+
+.heading {
+  font-size: 3rem;
+  max-width: 23ch;
+  margin-top: 160px;
+  margin-left: 48px;
+
+  span {
+    color: $purple;
+  }
+}
