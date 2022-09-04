@@ -1,6 +1,7 @@
 import logo from "assets/images/logo-light.jpg";
 import pollingPlace from "assets/images/polling-place.jpg";
 import styles from "./Login.module.scss";
+import Form from "./Form/Form";
 
 const Login = () => {
   return (
@@ -16,7 +17,7 @@ const Login = () => {
           className={styles.pollingImg}
         />
       </div>
-      <form className={styles.form}>Form</form>
+      <Form />
     </main>
   );
 };
