@@ -1,16 +1,35 @@
 @use "styles/variables" as *;
 
 .main {
-  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 128px;
+  gap: 96px;
+}
+
+.logo {
+  position: fixed;
+  left: 32px;
+  top: 32px;
 }
 
 .heading {
   font-size: 3rem;
   max-width: 23ch;
-  margin-top: 160px;
-  margin-left: 48px;
 
   span {
     color: $purple;
   }
+}
+
+.pollingImg {
+  margin-top: 64px;
+}
+
+.form {
+  width: 100%;
+  border: 1px solid $purple;
+  border-radius: 7px;
+  max-width: 512px;
 }
