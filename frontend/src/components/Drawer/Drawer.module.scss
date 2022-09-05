@@ -2,7 +2,6 @@
 
 .drawer {
   height: 100vh;
-  position: fixed;
   background-color: $purple;
   width: 272px;
   padding: 32px;
@@ -22,4 +21,10 @@
     padding: 12px 20px;
     width: 168px;
   }
+}
+
+.active {
+  background-color: #fff;
+  border-radius: 16px;
+  color: $purple;
 }

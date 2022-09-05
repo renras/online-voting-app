@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Drawer from "components/Drawer/Drawer";
+import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 
 const Home = () => {
   const isLoggedIn = true;
@@ -12,11 +12,7 @@ const Home = () => {
     }
   }, [isLoggedIn, navigate]);
 
-  return (
-    <div>
-      <Drawer />
-    </div>
-  );
+  return <Layout>hello</Layout>;
 };
 
 export default Home;
