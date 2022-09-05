@@ -22,7 +22,9 @@ const Form = () => {
       </Label>
       <Input id="password" type="password" className={styles.input} />
 
-      <Button>Login</Button>
+      <Button className={styles.button} fluid>
+        Login
+      </Button>
     </form>
   );
 };

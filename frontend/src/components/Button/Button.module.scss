@@ -1,5 +1,16 @@
 @use "styles/variables" as *;
+@use "styles/typography";
 
 .button {
   background-color: $purple;
+  padding: 1rem 2rem;
+  font-family: "Nunito";
+  font-weight: bold;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.fluid-true {
+  width: 100%;
 }
