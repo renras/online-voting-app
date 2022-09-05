@@ -7,3 +7,19 @@
   width: 272px;
   padding: 32px;
 }
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 64px;
+
+  a {
+    display: flex;
+    gap: 16px;
+    padding: 12px 20px;
+    width: 168px;
+  }
+}
