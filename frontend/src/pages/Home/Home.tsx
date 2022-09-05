@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Drawer from "components/Drawer/Drawer";
 
 const Home = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -11,7 +12,11 @@ const Home = () => {
     }
   }, [isLoggedIn, navigate]);
 
-  return <div>Home</div>;
+  return (
+    <div>
+      <Drawer />
+    </div>
+  );
 };
 
 export default Home;
