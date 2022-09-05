@@ -1,24 +1,47 @@
-import logo from "assets/images/logo-light.jpg";
-import pollingPlace from "assets/images/polling-place.jpg";
 import styles from "./Login.module.scss";
-import Form from "./Form/Form";
+import Label from "components/Label/Label";
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
+import { useLocation } from "react-router-dom";
+import LoginLayout from "components/Layout/LoginLayout/LoginLayout";
 
 const Login = () => {
+  const { pathname } = useLocation();
+
   return (
-    <main className={styles.main}>
-      <img src={logo} alt="logo" className={styles.logo} />
-      <div className={styles.leftColumn}>
-        <h1 className={styles.heading}>
-          Vote for the <span>Best Candidate</span> & Discover peace
-        </h1>
-        <img
-          src={pollingPlace}
-          alt="polling place"
-          className={styles.pollingImg}
-        />
-      </div>
-      <Form />
-    </main>
+    <LoginLayout>
+      <form className={styles.form}>
+        <div className={styles.headings}>
+          <a
+            href="/login"
+            className={pathname.includes("login") ? styles.active : ""}
+          >
+            Login
+          </a>
+          <a
+            href="/register"
+            className={pathname.includes("register") ? styles.active : ""}
+          >
+            Register
+          </a>
+        </div>
+
+        {/* username */}
+        <Label htmlFor="username" className={styles.label}>
+          Username
+        </Label>
+        <Input id="username" className={styles.input} />
+
+        <Label htmlFor="password" className={styles.label}>
+          Password
+        </Label>
+        <Input id="password" type="password" className={styles.input} />
+
+        <Button className={styles.button} fluid>
+          Login
+        </Button>
+      </form>
+    </LoginLayout>
   );
 };
 

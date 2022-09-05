@@ -1,0 +1,28 @@
+@use "styles/variables" as *;
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 150px;
+  gap: 96px;
+}
+
+.logo {
+  position: fixed;
+  left: 32px;
+  top: 32px;
+}
+
+.heading {
+  font-size: 3rem;
+  max-width: 23ch;
+
+  span {
+    color: $purple;
+  }
+}
+
+.pollingImg {
+  margin-top: 64px;
+}
