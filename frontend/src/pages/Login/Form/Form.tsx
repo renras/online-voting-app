@@ -2,13 +2,26 @@ import styles from "./Form.module.scss";
 import Label from "components/Label/Label";
 import Input from "components/Input/Input";
 import Button from "components/Button/Button";
+import { useLocation } from "react-router-dom";
 
 const Form = () => {
+  const { pathname } = useLocation();
+
   return (
     <form className={styles.form}>
       <div className={styles.headings}>
-        <h2 className={styles.active}>Login</h2>
-        <h2>Register</h2>
+        <a
+          href="/login"
+          className={pathname.includes("login") ? styles.active : ""}
+        >
+          Login
+        </a>
+        <a
+          href="/register"
+          className={pathname.includes("register") ? styles.active : ""}
+        >
+          Register
+        </a>
       </div>
 
       {/* username */}
