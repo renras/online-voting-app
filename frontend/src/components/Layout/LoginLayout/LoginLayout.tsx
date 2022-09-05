@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import logo from "assets/images/logo-light.jpg";
+import logo from "assets/images/logo-dark.png";
 import pollingPlace from "assets/images/polling-place.jpg";
 import styles from "./LoginLayout.module.scss";
 
