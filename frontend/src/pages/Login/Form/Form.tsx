@@ -1,6 +1,7 @@
 import styles from "./Form.module.scss";
 import Label from "components/Label/Label";
 import Input from "components/Input/Input";
+import Button from "components/Button/Button";
 
 const Form = () => {
   return (
@@ -20,6 +21,8 @@ const Form = () => {
         Password
       </Label>
       <Input id="password" type="password" className={styles.input} />
+
+      <Button>Login</Button>
     </form>
   );
 };
