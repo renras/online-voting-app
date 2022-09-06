@@ -1,0 +1,18 @@
+@use "styles/variables" as *;
+
+.container {
+  width: 100%;
+  max-width: 305px;
+  box-shadow: $shadow;
+  display: inline-block;
+  padding: 13px;
+  padding-bottom: 30px;
+  border-radius: 10px;
+}
+
+.img {
+  width: 100%;
+  aspect-ratio: 1 / 0.5;
+  background-color: gray;
+  border-radius: 10px;
+}
