@@ -6,7 +6,7 @@
   box-shadow: $shadow;
   display: inline-block;
   padding: 13px;
-  padding-bottom: 30px;
+  padding-bottom: 1.75rem;
   border-radius: 10px;
 }
 
@@ -15,4 +15,20 @@
   aspect-ratio: 1 / 0.5;
   background-color: gray;
   border-radius: 10px;
+}
+
+.content {
+  font-size: 19px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.button {
+  font-size: inherit;
 }
