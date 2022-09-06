@@ -20,18 +20,33 @@ const Home = () => {
     (candidate) => candidate.position === "President"
   );
 
-  // const candidatesForVicePresident = candidates.filter(
-  //   (candidate) => candidate.position === "Vice President"
-  // );
+  const candidatesForVicePresident = candidates.filter(
+    (candidate) => candidate.position === "Vice President"
+  );
 
   return (
     <Layout>
       <div className={styles.container}>
         <h2 className={styles.heading2}>For President</h2>
-        <Card
-          name={candidatesForPresident[0].name}
-          image={candidatesForPresident[0].image}
-        />
+        <div className={styles.candidates}>
+          {candidatesForPresident.map((candidate) => (
+            <Card
+              key={candidate.id}
+              name={candidate.name}
+              image={candidate.image}
+            />
+          ))}
+        </div>
+        <h2 className={styles.heading2}>For Vice President</h2>
+        <div className={styles.candidates}>
+          {candidatesForVicePresident.map((candidate) => (
+            <Card
+              key={candidate.id}
+              name={candidate.name}
+              image={candidate.image}
+            />
+          ))}
+        </div>
       </div>
     </Layout>
   );

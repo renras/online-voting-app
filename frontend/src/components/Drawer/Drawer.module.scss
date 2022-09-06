@@ -1,6 +1,8 @@
 @use "styles/variables" as *;
 
 .drawer {
+  position: fixed;
+  left: 0;
   height: 100vh;
   background-color: $purple;
   width: 272px;
