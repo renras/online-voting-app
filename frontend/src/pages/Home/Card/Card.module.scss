@@ -33,6 +33,8 @@
   font-weight: 600;
 }
 
-.button {
+.button.button {
   font-size: inherit;
+  padding: 0.5rem 1.25rem;
+  border-radius: 10px;
 }

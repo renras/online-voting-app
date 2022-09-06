@@ -14,7 +14,7 @@ const Card = ({ name, image }: Props) => {
       </div>
       <div className={styles.content}>
         <p className={styles.name}>{name}</p>
-        <Button size="small" className={styles.button}>
+        <Button size="small" theme="secondary" className={styles.button}>
           Vote
         </Button>
       </div>

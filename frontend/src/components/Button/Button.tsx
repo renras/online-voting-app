@@ -6,21 +6,24 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {
   className?: string;
   fluid?: boolean;
   size?: "small" | "large";
+  theme?: "primary" | "secondary";
 }
 
 const Button = ({
   children,
   className,
   fluid,
+  theme = "primary",
   size = "large",
   ...buttonProps
 }: Props) => {
   return (
     <button
       {...buttonProps}
-      className={`${styles.button} ${className} ${styles[`fluid-${fluid}`]} ${
-        styles[size]
-      }`}
+      className={`${styles.button} ${styles[`fluid-${fluid}`]} ${styles[size]}
+      ${styles[theme]}
+      ${className}
+      `}
     >
       {children}
     </button>
