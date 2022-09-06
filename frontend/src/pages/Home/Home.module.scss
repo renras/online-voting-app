@@ -1,0 +1,9 @@
+@use "styles/typography";
+
+.container {
+  padding: 1rem 2rem;
+}
+
+.heading2 {
+  @extend %heading2;
+}

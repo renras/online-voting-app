@@ -14,6 +14,7 @@ const Layout = ({ children }: Props) => {
       <Drawer />
       <div className={styles.content}>
         <header className={styles.header}>
+          <h1 className={styles.heading1}>Election 2022</h1>
           <div className={styles.user}>
             <img src={avatar} alt="avatar" className={styles.avatar} />
             <p>Sarwendah Onsai</p>
