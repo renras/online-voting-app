@@ -12,12 +12,13 @@ const Layout = ({ children }: Props) => {
   return (
     <div className={styles.layout}>
       <Drawer />
-      <div>
+      <div className={styles.content}>
         <header className={styles.header}>
-          <div></div>
-          <img src={avatar} alt="avatar" />
-          Sarwendah Onsai
-          <Button className={styles.button} size="small">
+          <div className={styles.user}>
+            <img src={avatar} alt="avatar" className={styles.avatar} />
+            <p>Sarwendah Onsai</p>
+          </div>
+          <Button className={styles.logoutButton} size="small">
             Logout
           </Button>
         </header>

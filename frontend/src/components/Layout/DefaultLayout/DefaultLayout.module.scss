@@ -1,7 +1,31 @@
 .layout {
   display: flex;
+  width: 100%;
+}
+
+.content {
+  flex: 1;
 }
 
 .header {
   padding: 1rem;
+  width: 100%;
+  display: flex;
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  margin-left: auto;
+}
+
+.logoutButton {
+  margin-left: 2rem;
 }
