@@ -10,11 +10,15 @@
   border-radius: 10px;
 }
 
-.img {
-  width: 100%;
+.imgWrapper {
+  overflow: hidden;
   aspect-ratio: 1 / 0.5;
   background-color: gray;
   border-radius: 10px;
+
+  img {
+    object-fit: cover;
+  }
 }
 
 .content {

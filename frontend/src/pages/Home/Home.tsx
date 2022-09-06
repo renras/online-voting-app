@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Home.module.scss";
-import data from "data.json";
+import data from "data";
 import Card from "./Card/Card";
 
 const Home = () => {
@@ -28,7 +28,10 @@ const Home = () => {
     <Layout>
       <div className={styles.container}>
         <h2 className={styles.heading2}>For President</h2>
-        <Card name={candidatesForPresident[0].name} />
+        <Card
+          name={candidatesForPresident[0].name}
+          image={candidatesForPresident[0].image}
+        />
       </div>
     </Layout>
   );
