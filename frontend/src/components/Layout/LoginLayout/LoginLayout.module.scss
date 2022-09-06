@@ -1,17 +1,15 @@
 @use "styles/variables" as *;
 
 .main {
+  padding: 32px;
+}
+
+.content {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 150px;
   gap: 96px;
-}
-
-.logo {
-  position: fixed;
-  left: 32px;
-  top: 32px;
+  margin-top: 96px;
 }
 
 .heading {
