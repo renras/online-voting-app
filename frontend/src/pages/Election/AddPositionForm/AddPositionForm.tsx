@@ -3,6 +3,7 @@ import styles from "./AddPositionForm.module.scss";
 import Label from "components/Label/Label";
 import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
+import closeIcon from "assets/icons/icon-close.svg";
 
 const AddPositionForm = () => {
   return (
@@ -16,6 +17,9 @@ const AddPositionForm = () => {
         <img src={plusIcon} alt="plus icon" />
         Add Position
       </Button>
+      <button className={styles.closeButton}>
+        <img src={closeIcon} alt="close form" className={styles.icon} />
+      </button>
     </form>
   );
 };
