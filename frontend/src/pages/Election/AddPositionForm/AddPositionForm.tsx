@@ -9,18 +9,17 @@ import { useForm } from "react-hook-form";
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
+  onSubmitForm: (data: FormData) => void;
 }
 
-interface FormData {
+export interface FormData {
   title: string;
 }
 
-const AddPositionForm = ({ onClose }: Props) => {
+const AddPositionForm = ({ onClose, onSubmitForm }: Props) => {
   const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+  const onSubmit = handleSubmit((data) => onSubmitForm(data));
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

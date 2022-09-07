@@ -1,0 +1,32 @@
+@use "styles/typography";
+@use "styles/variables" as *;
+
+.container {
+  margin-top: 3rem;
+}
+
+.heading2 {
+  @extend %heading2;
+}
+
+.content {
+  margin-top: 2rem;
+}
+
+.addCandidateButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 305px;
+  box-shadow: $shadow;
+  padding: 13px;
+  padding-bottom: 1.75rem;
+  border-radius: 10px;
+  background-color: #fff;
+  height: 200px;
+  font-weight: 600;
+  cursor: pointer;
+}
