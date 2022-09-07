@@ -4,8 +4,13 @@ import Label from "components/Label/Label";
 import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
 import closeIcon from "assets/icons/icon-close.svg";
+import { MouseEventHandler } from "react";
 
-const AddPositionForm = () => {
+interface Props {
+  onClose: MouseEventHandler<HTMLButtonElement>;
+}
+
+const AddPositionForm = ({ onClose }: Props) => {
   return (
     <form className={styles.form}>
       <h1 className={styles.heading}>Add New Position</h1>
@@ -17,7 +22,7 @@ const AddPositionForm = () => {
         <img src={plusIcon} alt="plus icon" />
         Add Position
       </Button>
-      <button className={styles.closeButton}>
+      <button className={styles.closeButton} type="button" onClick={onClose}>
         <img src={closeIcon} alt="close form" className={styles.icon} />
       </button>
     </form>
