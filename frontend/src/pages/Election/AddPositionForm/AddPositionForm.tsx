@@ -5,19 +5,34 @@ import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
 import closeIcon from "assets/icons/icon-close.svg";
 import { MouseEventHandler } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
 }
 
+interface FormData {
+  title: string;
+}
+
 const AddPositionForm = ({ onClose }: Props) => {
+  const { register, handleSubmit } = useForm<FormData>();
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <h1 className={styles.heading}>Add New Position</h1>
       <Label htmlFor="title" className={styles.label}>
         Title
       </Label>
-      <Input id="title" className={styles.input} />
+      <Input
+        id="title"
+        className={styles.input}
+        {...register("title", { required: true })}
+      />
       <Button className={styles.button} size="large">
         <img src={plusIcon} alt="plus icon" />
         Add Position
