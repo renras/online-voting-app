@@ -14,7 +14,7 @@ const Button = ({
   className,
   fluid,
   theme = "primary",
-  size = "large",
+  size = "small",
   ...buttonProps
 }: Props) => {
   return (

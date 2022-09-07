@@ -37,7 +37,7 @@ const Login = () => {
         </Label>
         <Input id="password" type="password" className={styles.input} />
 
-        <Button className={styles.button} fluid>
+        <Button className={styles.button} fluid size="large">
           Login
         </Button>
       </form>
