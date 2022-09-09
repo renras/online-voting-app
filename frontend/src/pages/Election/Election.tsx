@@ -6,10 +6,12 @@ import plusIcon from "assets/icons/icon-plus.svg";
 import AddPositionForm, { FormData } from "./AddPositionForm/AddPositionForm";
 import Modal from "components/Modal/Modal";
 import Candidates from "./Candidates/Candidates";
+import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [positions, setPositions] = useState<FormData[]>([]);
+  const [isAddingCandidate, setIsAddingCandidate] = useState(true);
 
   const handleSubmit = (data: FormData) => {
     setPositions((prev) => [...prev, data]);
@@ -44,6 +46,11 @@ const Election = () => {
             onClose={() => setIsAddingPosition(false)}
             onSubmitForm={handleSubmit}
           />
+        </Modal>
+      )}
+      {isAddingCandidate && (
+        <Modal>
+          <AddCandidateForm />
         </Modal>
       )}
     </>
