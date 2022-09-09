@@ -6,8 +6,14 @@ import iconAdd from "assets/icons/icon-add.svg";
 import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
 import iconTrash from "assets/icons/icon-trash.svg";
+import closeIcon from "assets/icons/icon-close.svg";
+import { MouseEventHandler } from "react";
 
-const AddCandidateForm = () => {
+interface Props {
+  onClose: MouseEventHandler<HTMLButtonElement>;
+}
+
+const AddCandidateForm = ({ onClose }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imgPreview, setImgPreview] = useState("");
 
@@ -49,20 +55,23 @@ const AddCandidateForm = () => {
       {imgPreview && (
         <div className={styles.imgPreviewContainer}>
           <img src={imgPreview} alt="preview" className={styles.imgPreview} />
-          <button type="button" className={styles.clearImgPreviewButton}>
+          <button
+            type="button"
+            className={styles.clearImgPreviewButton}
+            onClick={() => setImgPreview("")}
+          >
             <img src={iconTrash} alt="delete preview" />
           </button>
         </div>
       )}
 
-      <Button
-        className={styles.button}
-        size="large"
-        onClick={() => setImgPreview("")}
-      >
+      <Button className={styles.button} size="large">
         <img src={plusIcon} alt="add position" />
         Add Position
       </Button>
+      <button className={styles.closeButton} type="button" onClick={onClose}>
+        <img src={closeIcon} alt="close form" className={styles.icon} />
+      </button>
     </form>
   );
 };

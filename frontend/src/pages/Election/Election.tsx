@@ -11,7 +11,7 @@ import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [positions, setPositions] = useState<FormData[]>([]);
-  const [isAddingCandidate, setIsAddingCandidate] = useState(true);
+  const [isAddingCandidate, setIsAddingCandidate] = useState(false);
 
   const handleSubmit = (data: FormData) => {
     setPositions((prev) => [...prev, data]);
@@ -35,7 +35,7 @@ const Election = () => {
             <Candidates
               title={position.title}
               key={index}
-              onAddCandidate={() => console.log("add candidate")}
+              onAddCandidate={() => setIsAddingCandidate(true)}
             />
           ))}
         </div>
@@ -50,7 +50,7 @@ const Election = () => {
       )}
       {isAddingCandidate && (
         <Modal>
-          <AddCandidateForm />
+          <AddCandidateForm onClose={() => setIsAddingCandidate(false)} />
         </Modal>
       )}
     </>
