@@ -72,3 +72,15 @@
   object-fit: cover;
   border-radius: 15px;
 }
+
+.clearImgPreviewButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+
+  img {
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+  }
+}

@@ -5,12 +5,11 @@ import Input from "components/Input/Input";
 import iconAdd from "assets/icons/icon-add.svg";
 import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
+import iconTrash from "assets/icons/icon-trash.svg";
 
 const AddCandidateForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imgPreview, setImgPreview] = useState("");
-
-  console.log(imgPreview);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -50,10 +49,18 @@ const AddCandidateForm = () => {
       {imgPreview && (
         <div className={styles.imgPreviewContainer}>
           <img src={imgPreview} alt="preview" className={styles.imgPreview} />
+          <button type="button" className={styles.clearImgPreviewButton}>
+            <img src={iconTrash} alt="delete preview" />
+          </button>
         </div>
       )}
-      <Button className={styles.button} size="large">
-        <img src={plusIcon} alt="plus icon" />
+
+      <Button
+        className={styles.button}
+        size="large"
+        onClick={() => setImgPreview("")}
+      >
+        <img src={plusIcon} alt="add position" />
         Add Position
       </Button>
     </form>
