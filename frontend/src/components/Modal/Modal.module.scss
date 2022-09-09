@@ -1,12 +1,18 @@
 .modal {
   background-color: red;
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100%;
-  padding: 5rem;
-  min-height: 100vh;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 5rem;
 }

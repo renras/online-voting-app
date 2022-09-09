@@ -6,6 +6,9 @@
 }
 
 .content {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
   margin-top: 1rem;
 }
 
@@ -25,7 +28,7 @@
   padding: 13px;
   border-radius: 10px;
   background-color: #fff;
-  height: 200px;
+  height: 230px;
   font-weight: 600;
   cursor: pointer;
 }

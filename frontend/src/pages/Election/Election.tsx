@@ -8,23 +8,23 @@ import AddPositionForm, {
 } from "./AddPositionForm/AddPositionForm";
 import Modal from "components/Modal/Modal";
 import Candidates from "./Candidates/Candidates";
-import AddCandidateForm, {
-  FormData as CandidateFormData,
-} from "./AddCandidateForm/AddCandidateForm";
+import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
+import { Candidate } from "types/candidate";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [positions, setPositions] = useState<PositionFormData[]>([]);
-  const [isAddingCandidate, setIsAddingCandidate] = useState(false);
+  const [activePosition, setActivePosition] = useState<string | null>("");
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
 
   const handleAddPosition = (data: PositionFormData) => {
     setPositions((prev) => [...prev, data]);
     setIsAddingPosition(false);
   };
 
-  const handleAddCandidate = (data: CandidateFormData) => {
-    console.log(data);
-    setIsAddingCandidate(false);
+  const handleAddCandidate = (data: Candidate) => {
+    setCandidates((prev) => [...prev, data]);
+    setActivePosition(null);
   };
 
   return (
@@ -42,21 +42,12 @@ const Election = () => {
 
           {positions.map((position, index) => {
             return (
-              <div key={index}>
-                <Candidates
-                  title={position.title}
-                  onAddCandidate={() => setIsAddingCandidate(true)}
-                />
-                {isAddingCandidate && (
-                  <Modal>
-                    <AddCandidateForm
-                      onClose={() => setIsAddingCandidate(false)}
-                      onSubmitForm={handleAddCandidate}
-                      position={position.title}
-                    />
-                  </Modal>
-                )}
-              </div>
+              <Candidates
+                key={index}
+                title={position.title}
+                candidates={candidates}
+                onAddCandidateButtonClick={(title) => setActivePosition(title)}
+              />
             );
           })}
         </div>
@@ -66,6 +57,15 @@ const Election = () => {
           <AddPositionForm
             onClose={() => setIsAddingPosition(false)}
             onSubmitForm={handleAddPosition}
+          />
+        </Modal>
+      )}
+      {activePosition && (
+        <Modal>
+          <AddCandidateForm
+            onClose={() => setActivePosition(null)}
+            onSubmitForm={handleAddCandidate}
+            position={activePosition}
           />
         </Modal>
       )}

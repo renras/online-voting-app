@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Home.module.scss";
 import data from "data";
-import Card from "./Card/Card";
+import Card from "../../components/Card/Card";
 
 const Home = () => {
   const isLoggedIn = true;
@@ -33,7 +33,7 @@ const Home = () => {
             <Card
               key={candidate.id}
               name={candidate.name}
-              image={candidate.image}
+              photo={candidate.image}
             />
           ))}
         </div>
@@ -43,7 +43,7 @@ const Home = () => {
             <Card
               key={candidate.id}
               name={candidate.name}
-              image={candidate.image}
+              photo={candidate.image}
             />
           ))}
         </div>

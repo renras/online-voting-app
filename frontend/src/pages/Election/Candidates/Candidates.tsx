@@ -1,18 +1,36 @@
 import styles from "./Candidates.module.scss";
 import add from "assets/icons/icon-add.svg";
-import { MouseEventHandler } from "react";
+import { Candidate as CandidateType } from "types/candidate";
+import Card from "components/Card/Card";
 
 interface Props {
   title: string;
-  onAddCandidate: MouseEventHandler<HTMLButtonElement>;
+  onAddCandidateButtonClick: (title: string) => void;
+  candidates: CandidateType[];
 }
 
-const Candidate = ({ title, onAddCandidate }: Props) => {
+const Candidate = ({ title, onAddCandidateButtonClick, candidates }: Props) => {
+  const handleAddCandidate = () => {
+    onAddCandidateButtonClick(title);
+  };
   return (
     <div className={styles.container}>
       <h2 className={styles.heading2}>{title}</h2>
       <div className={styles.content}>
-        <button className={styles.addCandidateButton} onClick={onAddCandidate}>
+        {candidates.map((candidate, index) => {
+          if (candidate.position === title) {
+            return (
+              <Card key={index} name={candidate.name} photo={candidate.photo} />
+            );
+          }
+
+          return null;
+        })}
+
+        <button
+          className={styles.addCandidateButton}
+          onClick={handleAddCandidate}
+        >
           <img src={add} alt="add candidate" />
           <p>Add Candidate</p>
         </button>
