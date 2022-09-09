@@ -3,19 +3,28 @@ import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Election.module.scss";
 import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
-import AddPositionForm, { FormData } from "./AddPositionForm/AddPositionForm";
+import AddPositionForm, {
+  FormData as PositionFormData,
+} from "./AddPositionForm/AddPositionForm";
 import Modal from "components/Modal/Modal";
 import Candidates from "./Candidates/Candidates";
-import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
+import AddCandidateForm, {
+  FormData as CandidateFormData,
+} from "./AddCandidateForm/AddCandidateForm";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
-  const [positions, setPositions] = useState<FormData[]>([]);
+  const [positions, setPositions] = useState<PositionFormData[]>([]);
   const [isAddingCandidate, setIsAddingCandidate] = useState(false);
 
-  const handleSubmit = (data: FormData) => {
+  const handleAddPosition = (data: PositionFormData) => {
     setPositions((prev) => [...prev, data]);
     setIsAddingPosition(false);
+  };
+
+  const handleAddCandidate = (data: CandidateFormData) => {
+    console.log(data);
+    setIsAddingCandidate(false);
   };
 
   return (
@@ -31,26 +40,33 @@ const Election = () => {
             Add Position
           </Button>
 
-          {positions.map((position, index) => (
-            <Candidates
-              title={position.title}
-              key={index}
-              onAddCandidate={() => setIsAddingCandidate(true)}
-            />
-          ))}
+          {positions.map((position, index) => {
+            return (
+              <div key={index}>
+                <Candidates
+                  title={position.title}
+                  onAddCandidate={() => setIsAddingCandidate(true)}
+                />
+                {isAddingCandidate && (
+                  <Modal>
+                    <AddCandidateForm
+                      onClose={() => setIsAddingCandidate(false)}
+                      onSubmitForm={handleAddCandidate}
+                      position={position.title}
+                    />
+                  </Modal>
+                )}
+              </div>
+            );
+          })}
         </div>
       </Layout>
       {isAddingPosition && (
         <Modal>
           <AddPositionForm
             onClose={() => setIsAddingPosition(false)}
-            onSubmitForm={handleSubmit}
+            onSubmitForm={handleAddPosition}
           />
-        </Modal>
-      )}
-      {isAddingCandidate && (
-        <Modal>
-          <AddCandidateForm onClose={() => setIsAddingCandidate(false)} />
         </Modal>
       )}
     </>

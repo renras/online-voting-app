@@ -8,14 +8,34 @@ import plusIcon from "assets/icons/icon-plus.svg";
 import iconTrash from "assets/icons/icon-trash.svg";
 import closeIcon from "assets/icons/icon-close.svg";
 import { MouseEventHandler } from "react";
+import { useForm } from "react-hook-form";
+
+export interface FormData {
+  name: string;
+  photo: string;
+  position: string;
+}
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
+  onSubmitForm: (data: FormData) => void;
+  position: string;
 }
 
-const AddCandidateForm = ({ onClose }: Props) => {
+const AddCandidateForm = ({ onClose, onSubmitForm, position }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imgPreview, setImgPreview] = useState("");
+  const { register, handleSubmit } = useForm<FormData>();
+
+  const onSubmit = handleSubmit((data) => {
+    if (!imgPreview) return;
+
+    onSubmitForm({
+      name: data.name,
+      photo: imgPreview,
+      position: position,
+    });
+  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -25,12 +45,16 @@ const AddCandidateForm = ({ onClose }: Props) => {
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <h1 className={styles.heading}>Add New Candidate</h1>
       <Label htmlFor="name" className={styles.label}>
         Name
       </Label>
-      <Input id="name" className={styles.input} />
+      <Input
+        id="name"
+        className={styles.input}
+        {...register("name", { required: true })}
+      />
       <Label htmlFor="Photo" className={styles.label}>
         Add Photo
       </Label>
