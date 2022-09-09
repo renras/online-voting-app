@@ -30,7 +30,11 @@ const Election = () => {
           </Button>
 
           {positions.map((position, index) => (
-            <Candidates title={position.title} key={index} />
+            <Candidates
+              title={position.title}
+              key={index}
+              onAddCandidate={() => console.log("add candidate")}
+            />
           ))}
         </div>
       </Layout>

@@ -5,12 +5,12 @@
   margin-top: 3rem;
 }
 
-.heading2 {
-  @extend %heading2;
+.content {
+  margin-top: 1rem;
 }
 
-.content {
-  margin-top: 2rem;
+.heading2 {
+  @extend %heading2;
 }
 
 .addCandidateButton {
@@ -23,7 +23,6 @@
   max-width: 305px;
   box-shadow: $shadow;
   padding: 13px;
-  padding-bottom: 1.75rem;
   border-radius: 10px;
   background-color: #fff;
   height: 200px;
