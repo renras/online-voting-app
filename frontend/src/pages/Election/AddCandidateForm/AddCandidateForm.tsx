@@ -10,7 +10,7 @@ import closeIcon from "assets/icons/icon-close.svg";
 import { MouseEventHandler } from "react";
 import { useForm } from "react-hook-form";
 
-export interface FormData {
+export interface CandidateFormData {
   name: string;
   photo: string;
   position: string;
@@ -18,14 +18,14 @@ export interface FormData {
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
-  onSubmitForm: (data: FormData) => void;
+  onSubmitForm: (data: CandidateFormData) => void;
   position: string;
 }
 
 const AddCandidateForm = ({ onClose, onSubmitForm, position }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imgPreview, setImgPreview] = useState("");
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<CandidateFormData>();
 
   const onSubmit = handleSubmit((data) => {
     if (!imgPreview) return;

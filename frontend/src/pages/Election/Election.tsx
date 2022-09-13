@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Election.module.scss";
 import Button from "components/Button/Button";
@@ -8,9 +8,11 @@ import AddPositionForm, {
 } from "./AddPositionForm/AddPositionForm";
 import Modal from "components/Modal/Modal";
 import Candidates from "./Candidates/Candidates";
-import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
-import { Candidate } from "types/candidate";
+import AddCandidateForm, {
+  CandidateFormData,
+} from "./AddCandidateForm/AddCandidateForm";
 import usePositions from "./hooks/usePositions";
+import useCandidates from "./hooks/useCandidates";
 import { errorToast } from "utils/toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [activePosition, setActivePosition] = useState<string | null>("");
-  const [candidates, setCandidates] = useState<Candidate[]>([]);
   const navigate = useNavigate();
 
   const {
@@ -26,6 +27,11 @@ const Election = () => {
     isError: isPositionsError,
     isLoading: isPositionsLoading,
   } = usePositions();
+  const {
+    candidates,
+    isError: isCandidatesError,
+    isLoading: isCandidatesLoading,
+  } = useCandidates();
 
   const handleAddPosition = async (data: PositionFormData) => {
     try {
@@ -38,13 +44,16 @@ const Election = () => {
     }
   };
 
-  const handleAddCandidate = (data: Candidate) => {
-    setCandidates((prev) => [...prev, data]);
+  const handleAddCandidate = (data: CandidateFormData) => {
+    // setCandidates((prev) => [...prev, data]);
     setActivePosition(null);
   };
 
-  if (isPositionsLoading) return <div>Loading...</div>;
-  if (isPositionsError) return <div>There was an error loading the page</div>;
+  if (isPositionsLoading || isCandidatesLoading) return <div>Loading...</div>;
+  if (isPositionsError || isCandidatesError)
+    return <div>There was an error loading the page</div>;
+
+  console.log(candidates);
 
   return (
     <>
