@@ -13,7 +13,7 @@ interface Props {
 }
 
 export interface FormData {
-  title: string;
+  name: string;
 }
 
 const AddPositionForm = ({ onClose, onSubmitForm }: Props) => {
@@ -30,7 +30,7 @@ const AddPositionForm = ({ onClose, onSubmitForm }: Props) => {
       <Input
         id="title"
         className={styles.input}
-        {...register("title", { required: true })}
+        {...register("name", { required: true })}
       />
       <Button className={styles.button} size="large">
         <img src={plusIcon} alt="plus icon" />

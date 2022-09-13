@@ -11,11 +11,15 @@ import Candidates from "./Candidates/Candidates";
 import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
 import { Candidate } from "types/candidate";
 import usePositions from "./hooks/usePositions";
+import { errorToast } from "utils/toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [activePosition, setActivePosition] = useState<string | null>("");
   const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const navigate = useNavigate();
 
   const {
     positions,
@@ -23,10 +27,15 @@ const Election = () => {
     isLoading: isPositionsLoading,
   } = usePositions();
 
-  const handleAddPosition = (data: PositionFormData) => {
-    // todo: add position to database
-    // setPositions((prev) => [...prev, data]);
-    setIsAddingPosition(false);
+  const handleAddPosition = async (data: PositionFormData) => {
+    try {
+      await axios.post(`${process.env.REACT_APP_HOST}/positions/`, data);
+      navigate(0);
+    } catch {
+      errorToast("Failed to add position");
+    } finally {
+      setIsAddingPosition(false);
+    }
   };
 
   const handleAddCandidate = (data: Candidate) => {

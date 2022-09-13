@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 require_once('../../Config/Database.php');
 require_once('../../Models/Position.php');
 
+// get request
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
     $database = new Database();
     $db = $database->connect();
@@ -34,6 +35,27 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     } else {
         echo json_encode(
             array('message' => 'No Positions Found')
+        );
+    }
+}
+
+// post request
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $database = new Database();
+    $db = $database->connect();
+
+    $position = new Position($db);
+    $data = json_decode(file_get_contents("php://input"));
+
+    $position->name = $data->name;
+
+    if($position->create()) {
+        echo json_encode(
+            array('message' => 'Position Created')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Position Not Created')
         );
     }
 }
