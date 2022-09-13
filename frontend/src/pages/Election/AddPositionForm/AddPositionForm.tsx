@@ -6,20 +6,30 @@ import plusIcon from "assets/icons/icon-plus.svg";
 import closeIcon from "assets/icons/icon-close.svg";
 import { MouseEventHandler } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { errorToast } from "utils/toast";
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
-  onSubmitForm: (data: FormData) => void;
 }
 
 export interface FormData {
   name: string;
 }
 
-const AddPositionForm = ({ onClose, onSubmitForm }: Props) => {
+const AddPositionForm = ({ onClose }: Props) => {
   const { register, handleSubmit } = useForm<FormData>();
+  const navigate = useNavigate();
 
-  const onSubmit = handleSubmit((data) => onSubmitForm(data));
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await axios.post(`${process.env.REACT_APP_HOST}/positions/`, data);
+      navigate(0);
+    } catch {
+      errorToast("Failed to add position");
+    }
+  });
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

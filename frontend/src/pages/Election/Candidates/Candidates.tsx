@@ -17,15 +17,20 @@ const Candidate = ({ title, onAddCandidateButtonClick, candidates }: Props) => {
     <div className={styles.container}>
       <h2 className={styles.heading2}>{title}</h2>
       <div className={styles.content}>
-        {candidates.map((candidate, index) => {
-          if (candidate.position === title) {
-            return (
-              <Card key={index} name={candidate.name} photo={candidate.photo} />
-            );
-          }
+        {candidates.length > 0 &&
+          candidates.map((candidate, index) => {
+            if (candidate.position === title) {
+              return (
+                <Card
+                  key={index}
+                  name={candidate.name}
+                  photo={candidate.photo}
+                />
+              );
+            }
 
-          return null;
-        })}
+            return null;
+          })}
 
         <button
           className={styles.addCandidateButton}

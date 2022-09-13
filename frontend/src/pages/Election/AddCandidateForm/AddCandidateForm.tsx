@@ -9,6 +9,9 @@ import iconTrash from "assets/icons/icon-trash.svg";
 import closeIcon from "assets/icons/icon-close.svg";
 import { MouseEventHandler } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { errorToast, successToast } from "utils/toast";
+import { useNavigate } from "react-router-dom";
 
 export interface CandidateFormData {
   name: string;
@@ -18,30 +21,52 @@ export interface CandidateFormData {
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
-  onSubmitForm: (data: CandidateFormData) => void;
   position: string;
 }
 
-const AddCandidateForm = ({ onClose, onSubmitForm, position }: Props) => {
+const AddCandidateForm = ({ onClose, position }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [imgPreview, setImgPreview] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const { register, handleSubmit } = useForm<CandidateFormData>();
+  const navigate = useNavigate();
 
-  const onSubmit = handleSubmit((data) => {
-    if (!imgPreview) return;
+  const onSubmit = handleSubmit(async (data) => {
+    if (!file) return;
 
-    onSubmitForm({
-      name: data.name,
-      photo: imgPreview,
-      position: position,
-    });
+    try {
+      successToast("Image may take a while to upload...");
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "o2xlly6v");
+
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dliwmso9q/image/upload",
+        formData
+      );
+
+      await axios.post(`${process.env.REACT_APP_HOST}/candidates/`, {
+        name: data.name,
+        photo: response.data.url,
+        position: position,
+      });
+      navigate(0);
+    } catch {
+      errorToast("Failed to add user. Please try again.");
+    }
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setFile(file);
       setImgPreview(URL.createObjectURL(file));
     }
+  };
+
+  const handleClearImgPreview = () => {
+    setImgPreview("");
+    setFile(null);
   };
 
   return (
@@ -82,7 +107,7 @@ const AddCandidateForm = ({ onClose, onSubmitForm, position }: Props) => {
           <button
             type="button"
             className={styles.clearImgPreviewButton}
-            onClick={() => setImgPreview("")}
+            onClick={() => handleClearImgPreview()}
           >
             <img src={iconTrash} alt="delete preview" />
           </button>
