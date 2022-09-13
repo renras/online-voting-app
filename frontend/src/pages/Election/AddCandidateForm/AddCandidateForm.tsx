@@ -90,8 +90,8 @@ const AddCandidateForm = ({ onClose, onSubmitForm, position }: Props) => {
       )}
 
       <Button className={styles.button} size="large">
-        <img src={plusIcon} alt="add position" />
-        Add Position
+        <img src={plusIcon} alt="add candidate" />
+        Add Candidate
       </Button>
       <button className={styles.closeButton} type="button" onClick={onClose}>
         <img src={closeIcon} alt="close form" className={styles.icon} />

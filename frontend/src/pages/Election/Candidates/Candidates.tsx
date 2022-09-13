@@ -32,7 +32,7 @@ const Candidate = ({ title, onAddCandidateButtonClick, candidates }: Props) => {
           onClick={handleAddCandidate}
         >
           <img src={add} alt="add candidate" />
-          <p>Add Candidate</p>
+          <p>Add {title}</p>
         </button>
       </div>
     </div>
