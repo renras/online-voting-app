@@ -41,4 +41,28 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 
+// post request
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $database = new Database();
+    $db = $database->connect();
+
+    $candidate = new Candidate($db);
+
+    $data = json_decode(file_get_contents("php://input"));
+
+    $candidate->name = $data->name;
+    $candidate->photo = $data->photo;
+    $candidate->position = $data->position;
+
+    if($candidate->create()) {
+        echo json_encode(
+            array('message' => 'Candidate Created')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Candidate Not Created')
+        );
+    }
+}
+
 ?>
