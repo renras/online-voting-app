@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Election.module.scss";
 import Button from "components/Button/Button";
@@ -45,15 +45,19 @@ const Election = () => {
   };
 
   const handleAddCandidate = (data: CandidateFormData) => {
-    // setCandidates((prev) => [...prev, data]);
-    setActivePosition(null);
+    try {
+      axios.post(`${process.env.REACT_APP_HOST}/candidates/`, data);
+      navigate(0);
+    } catch {
+      errorToast("Failed to add candidate");
+    } finally {
+      setActivePosition(null);
+    }
   };
 
   if (isPositionsLoading || isCandidatesLoading) return <div>Loading...</div>;
   if (isPositionsError || isCandidatesError)
     return <div>There was an error loading the page</div>;
-
-  console.log(candidates);
 
   return (
     <>
