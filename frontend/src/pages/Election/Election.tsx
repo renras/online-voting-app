@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Election.module.scss";
 import Button from "components/Button/Button";
@@ -10,15 +10,18 @@ import Modal from "components/Modal/Modal";
 import Candidates from "./Candidates/Candidates";
 import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
 import { Candidate } from "types/candidate";
+import { Position } from "types/position";
+import axios from "axios";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
-  const [positions, setPositions] = useState<PositionFormData[]>([]);
+  const [positions, setPositions] = useState<Position[]>([]);
   const [activePosition, setActivePosition] = useState<string | null>("");
   const [candidates, setCandidates] = useState<Candidate[]>([]);
 
   const handleAddPosition = (data: PositionFormData) => {
-    setPositions((prev) => [...prev, data]);
+    // todo: add position to database
+    // setPositions((prev) => [...prev, data]);
     setIsAddingPosition(false);
   };
 
@@ -26,6 +29,16 @@ const Election = () => {
     setCandidates((prev) => [...prev, data]);
     setActivePosition(null);
   };
+
+  useEffect(() => {
+    (async () => {
+      const positions = await axios.get(
+        `${process.env.REACT_APP_HOST}/positions/`
+      );
+
+      if (positions) setPositions(positions.data);
+    })();
+  }, []);
 
   return (
     <>
@@ -40,11 +53,11 @@ const Election = () => {
             Add Position
           </Button>
 
-          {positions.map((position, index) => {
+          {positions.map((position) => {
             return (
               <Candidates
-                key={index}
-                title={position.title}
+                key={position.id}
+                title={position.name}
                 candidates={candidates}
                 onAddCandidateButtonClick={(title) => setActivePosition(title)}
               />
