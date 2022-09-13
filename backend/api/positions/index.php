@@ -1,10 +1,12 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
 
-require_once('../Models/Position.php');
-require_once('../Config/Database.php');
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: *');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+require_once('../../Config/Database.php');
+require_once('../../Models/Position.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
     $database = new Database();
@@ -16,7 +18,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if($num > 0) {
         $positions_arr = array();
-        $positions_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
@@ -26,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 'name' => $name
             );
 
-            array_push($positions_arr['data'], $position_item);
+            array_push($positions_arr, $position_item);
         }
 
         echo json_encode($positions_arr);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Layout from "components/Layout/DefaultLayout/DefaultLayout";
 import styles from "./Election.module.scss";
 import Button from "components/Button/Button";
@@ -10,14 +10,18 @@ import Modal from "components/Modal/Modal";
 import Candidates from "./Candidates/Candidates";
 import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
 import { Candidate } from "types/candidate";
-import { Position } from "types/position";
-import axios from "axios";
+import usePositions from "./hooks/usePositions";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
-  const [positions, setPositions] = useState<Position[]>([]);
   const [activePosition, setActivePosition] = useState<string | null>("");
   const [candidates, setCandidates] = useState<Candidate[]>([]);
+
+  const {
+    positions,
+    isError: isPositionsError,
+    isLoading: isPositionsLoading,
+  } = usePositions();
 
   const handleAddPosition = (data: PositionFormData) => {
     // todo: add position to database
@@ -30,15 +34,8 @@ const Election = () => {
     setActivePosition(null);
   };
 
-  useEffect(() => {
-    (async () => {
-      const positions = await axios.get(
-        `${process.env.REACT_APP_HOST}/positions/`
-      );
-
-      if (positions) setPositions(positions.data);
-    })();
-  }, []);
+  if (isPositionsLoading) return <div>Loading...</div>;
+  if (isPositionsError) return <div>There was an error loading the page</div>;
 
   return (
     <>

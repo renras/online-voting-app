@@ -1,6 +1,4 @@
 <?php
-  require_once('../Config/Database.php');
-
   class Position {
     private $conn;
     private $table = 'positions';
