@@ -49,13 +49,11 @@ public function create() {
   $this->name = htmlspecialchars(strip_tags($this->name));
   $this->photo = htmlspecialchars(strip_tags($this->photo));
   $this->position = htmlspecialchars(strip_tags($this->position));
-  $this->votes = htmlspecialchars(strip_tags($this->votes));
 
 
   $stmt->bindParam(':name', $this->name);
   $stmt->bindParam(':photo', $this->photo);
   $stmt->bindParam(':position', $this->position);
-  $stmt->bindParam(':votes', $this->votes);
 
   if($stmt->execute()) {
     return true;
@@ -67,7 +65,7 @@ public function create() {
 }
 
 public function update() {
-  $query = 'UPDATE ' . $this->table . ' SET name = :name, photo = :photo, position = :position, votes = :votes WHERE id = :id';
+  $query = 'UPDATE ' . $this->table . ' SET name = :name, photo = :photo, position = :position WHERE id = :id';
 
   $stmt = $this->conn->prepare($query);
 
@@ -80,7 +78,6 @@ public function update() {
   $stmt->bindParam(':photo', $this->photo);
   $stmt->bindParam(':position', $this->position);
   $stmt->bindParam(':id', $this->id);
-  $stmt->bindParam(':votes', $this->votes);
 
   if($stmt->execute()) {
     return true;

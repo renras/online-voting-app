@@ -5,13 +5,19 @@ import Card from "components/Card/Card";
 
 interface Props {
   title: string;
-  onAddCandidateButtonClick: (title: string) => void;
+  onAddCandidateButtonClick?: (title: string) => void;
   candidates: CandidateType[];
+  isEditable?: boolean;
 }
 
-const Candidate = ({ title, onAddCandidateButtonClick, candidates }: Props) => {
+const Candidate = ({
+  title,
+  onAddCandidateButtonClick,
+  candidates,
+  isEditable,
+}: Props) => {
   const handleAddCandidate = () => {
-    onAddCandidateButtonClick(title);
+    onAddCandidateButtonClick && onAddCandidateButtonClick(title);
   };
   return (
     <div className={styles.container}>
@@ -32,13 +38,15 @@ const Candidate = ({ title, onAddCandidateButtonClick, candidates }: Props) => {
             return null;
           })}
 
-        <button
-          className={styles.addCandidateButton}
-          onClick={handleAddCandidate}
-        >
-          <img src={add} alt="add candidate" />
-          <p>Add {title}</p>
-        </button>
+        {isEditable && (
+          <button
+            className={styles.addCandidateButton}
+            onClick={handleAddCandidate}
+          >
+            <img src={add} alt="add candidate" />
+            <p>Add {title}</p>
+          </button>
+        )}
       </div>
     </div>
   );

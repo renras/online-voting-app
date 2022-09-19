@@ -5,7 +5,7 @@ import Button from "components/Button/Button";
 import plusIcon from "assets/icons/icon-plus.svg";
 import AddPositionForm from "./AddPositionForm/AddPositionForm";
 import Modal from "components/Modal/Modal";
-import Candidates from "./Candidates/Candidates";
+import Candidates from "../../components/Candidates/Candidates";
 import AddCandidateForm from "./AddCandidateForm/AddCandidateForm";
 import usePositions from "../../hooks/usePositions";
 import useCandidates from "../../hooks/useCandidates";
@@ -52,6 +52,7 @@ const Election = () => {
                   onAddCandidateButtonClick={(title) =>
                     setActivePosition(title)
                   }
+                  isEditable
                 />
               );
             })}
