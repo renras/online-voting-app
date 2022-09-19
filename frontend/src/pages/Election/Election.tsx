@@ -42,16 +42,19 @@ const Election = () => {
             Add Position
           </Button>
 
-          {positions.map((position) => {
-            return (
-              <Candidates
-                key={position.id}
-                title={position.name}
-                candidates={candidates}
-                onAddCandidateButtonClick={(title) => setActivePosition(title)}
-              />
-            );
-          })}
+          {positions.length > 0 &&
+            positions.map((position) => {
+              return (
+                <Candidates
+                  key={position.id}
+                  title={position.name}
+                  candidates={candidates}
+                  onAddCandidateButtonClick={(title) =>
+                    setActivePosition(title)
+                  }
+                />
+              );
+            })}
         </div>
       </Layout>
       {isAddingPosition && (
