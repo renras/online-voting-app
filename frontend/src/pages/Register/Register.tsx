@@ -5,6 +5,10 @@ import Button from "components/Button/Button";
 import { useLocation } from "react-router-dom";
 import LoginLayout from "components/Layout/LoginLayout/LoginLayout";
 import { useForm } from "react-hook-form";
+import { errorToast } from "utils/toast";
+import axios from "axios";
+import { User } from "types/user";
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
   username: string;
@@ -15,8 +19,44 @@ interface FormData {
 const Login = () => {
   const { pathname } = useLocation();
   const { register, handleSubmit } = useForm<FormData>();
+  const navigate = useNavigate();
 
-  const onSubmit = handleSubmit(async (data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    if (data.password !== data.confirm_password) {
+      errorToast("Passwords do not match");
+      return;
+    }
+
+    try {
+      const users = (await (
+        await axios.get(`${process.env.REACT_APP_HOST}/users/`)
+      ).data) as User[];
+
+      const user = users.find((user) => user.username === data.username);
+
+      if (user) {
+        errorToast("Username already exists");
+        return;
+      }
+
+      await axios.post(`${process.env.REACT_APP_HOST}/users/`, {
+        username: data.username,
+        password: data.password,
+      });
+
+      // set to local storage and redirect to home page
+      const newUsers = (await (
+        await axios.get(`${process.env.REACT_APP_HOST}/users/`)
+      ).data) as User[];
+
+      const newUser = newUsers.find((user) => user.username === data.username);
+
+      localStorage.setItem("ova_user", JSON.stringify(newUser));
+      navigate("/", { replace: true });
+    } catch {
+      errorToast("Something went wrong. Please try again.");
+    }
+  });
 
   return (
     <LoginLayout>
