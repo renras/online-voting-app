@@ -27,7 +27,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 'id' => $id,
                 'name' => $name,
                 'photo' => $photo,
-                'position' => $position
+                'position' => $position,
+                'votes' => $votes
             );
 
             array_push($candidates_arr, $candidate_item);
@@ -53,6 +54,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $candidate->name = $data->name;
     $candidate->photo = $data->photo;
     $candidate->position = $data->position;
+    $candidate->votes = $data->votes;
 
     if($candidate->create()) {
         echo json_encode(
