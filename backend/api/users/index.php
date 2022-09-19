@@ -26,7 +26,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
             $user_item = array(
                 'id' => $id,
                 'username' => $username,
-                'password' => $password
+                'password' => $password,
+                'is_admin' => $is_admin == 1 ? true : false
             );
 
             array_push($users_arr, $user_item);
