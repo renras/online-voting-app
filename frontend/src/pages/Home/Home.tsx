@@ -5,6 +5,7 @@ import styles from "./Home.module.scss";
 import Candidates from "components/Candidates/Candidates";
 import useCandidates from "hooks/useCandidates";
 import usePositions from "hooks/usePositions";
+import withAuthentication from "hoc/withAuthentication";
 
 const Home = () => {
   const isLoggedIn = true;
@@ -49,4 +50,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuthentication(Home);
