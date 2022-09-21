@@ -1,14 +1,21 @@
 import Drawer from "components/Drawer/Drawer";
 import { ReactNode } from "react";
 import styles from "./DefaultLayout.module.scss";
-import avatar from "assets/images/avatar.png";
 import Button from "components/Button/Button";
+import { User } from "types/user";
 
 interface Props {
   children: ReactNode;
 }
 
 const Layout = ({ children }: Props) => {
+  const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
+
+  const handleLogout = () => {
+    localStorage.removeItem("ova_user");
+    window.location.href = "/login";
+  };
+
   return (
     <div className={styles.layout}>
       <Drawer />
@@ -16,10 +23,13 @@ const Layout = ({ children }: Props) => {
         <header className={styles.header}>
           <h1 className={styles.heading1}>Election 2022</h1>
           <div className={styles.user}>
-            <img src={avatar} alt="avatar" className={styles.avatar} />
-            <p>Sarwendah Onsai</p>
+            <p>Welcome, &nbsp;{ova_user.username}!</p>
           </div>
-          <Button className={styles.logoutButton} size="small">
+          <Button
+            className={styles.logoutButton}
+            size="small"
+            onClick={() => handleLogout()}
+          >
             Logout
           </Button>
         </header>

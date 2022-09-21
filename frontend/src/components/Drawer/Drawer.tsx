@@ -9,6 +9,7 @@ import iconHomePurple from "assets/icons/icon-home-purple.svg";
 import iconResultsPurple from "assets/icons/icon-results-purple.svg";
 import iconVotersPurple from "assets/icons/icon-voters-purple.svg";
 import { useLocation } from "react-router-dom";
+import { User } from "types/user";
 
 const Drawer = () => {
   const { pathname } = useLocation();
@@ -18,6 +19,7 @@ const Drawer = () => {
     pathname === "/election" ? iconElectionPurple : iconElection;
   const votersIcon = pathname === "/voters" ? iconVotersPurple : iconVoters;
   const resultsIcon = pathname === "/results" ? iconResultsPurple : iconResults;
+  const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
 
   return (
     <aside className={styles.drawer}>
@@ -27,13 +29,15 @@ const Drawer = () => {
           <img src={homeIcon} alt="home icon" />
           Home
         </a>
-        <a
-          href="/election"
-          className={pathname === "/election" ? styles.active : ""}
-        >
-          <img src={electionIcon} alt="election icon" />
-          Election
-        </a>
+        {ova_user.is_admin && (
+          <a
+            href="/election"
+            className={pathname === "/election" ? styles.active : ""}
+          >
+            <img src={electionIcon} alt="election icon" />
+            Election
+          </a>
+        )}
         <a
           href="/voters"
           className={pathname === "/voters" ? styles.active : ""}
