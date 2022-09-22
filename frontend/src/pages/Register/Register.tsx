@@ -32,7 +32,10 @@ const Login = () => {
         await axios.get(`${process.env.REACT_APP_HOST}/users/`)
       ).data) as User[];
 
-      const user = users.find((user) => user.username === data.username);
+      const user =
+        users.length > 0
+          ? users.find((user) => user.username === data.username)
+          : null;
 
       if (user) {
         errorToast("Username already exists");
@@ -53,7 +56,8 @@ const Login = () => {
 
       localStorage.setItem("ova_user", JSON.stringify(newUser));
       navigate("/", { replace: true });
-    } catch {
+    } catch (error) {
+      console.log(error);
       errorToast("Something went wrong. Please try again.");
     }
   });

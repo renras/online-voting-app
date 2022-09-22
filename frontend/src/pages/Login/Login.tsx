@@ -25,10 +25,13 @@ const Login = () => {
       await axios.get(`${process.env.REACT_APP_HOST}/users/`)
     ).data) as User[];
 
-    const user = users.find(
-      (user) =>
-        user.username === data.username && user.password === data.password
-    );
+    const user =
+      users.length > 0
+        ? users.find(
+            (user) =>
+              user.username === data.username && user.password === data.password
+          )
+        : null;
 
     if (!user) {
       errorToast("Invalid username or password");
