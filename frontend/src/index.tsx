@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import Election from "./pages/Election/Election";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Results from "./pages/Results/Results";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -21,6 +22,7 @@ root.render(
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="election" element={<Election />} />
+        <Route path="results" element={<Results />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
