@@ -4,8 +4,9 @@ class Vote {
   private $table = 'votes';
 
   public $id;
-  public $user_id;
+  public $candidate_id;
   public $position_id;
+  public $voter_id;
 
   public function __construct($db) {
     $this->conn = $db;
@@ -33,20 +34,22 @@ class Vote {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $this->id = $row['id'];
-    $this->user_id = $row['user_id'];
+    $this->candidate_id = $row['candidate_id'];
     $this->position_id = $row['position_id'];
+    $this->voter_id = $row['voter_id'];
   }
 
   public function create() {
-    $query = 'INSERT INTO ' . $this->table . ' SET user_id = :user_id, position_id = :position_id';
+    $query = 'INSERT INTO ' . $this->table . ' SET candidate_id = :candidate_id, position_id = :position_id, voter_id = :voter_id';
 
     $stmt = $this->conn->prepare($query);
 
-    $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $this->candidate_id = htmlspecialchars(strip_tags($this->candidate_id));
     $this->position_id = htmlspecialchars(strip_tags($this->position_id));
 
-    $stmt->bindParam(':user_id', $this->user_id);
+    $stmt->bindParam(':candidate_id', $this->candidate_id);
     $stmt->bindParam(':position_id', $this->position_id);
+    $stmt->bindParam(':voter_id', $this->voter_id);
 
     if($stmt->execute()) {
       return true;
@@ -58,17 +61,19 @@ class Vote {
   }
 
   public function update() {
-    $query = 'UPDATE ' . $this->table . ' SET user_id = :user_id, position_id = :position_id WHERE id = :id';
+    $query = 'UPDATE ' . $this->table . ' SET candidate_id = :candidate_id, position_id = :position_id, voter_id = :voter_id WHERE id = :id';
 
     $stmt = $this->conn->prepare($query);
 
     $this->id = htmlspecialchars(strip_tags($this->id));
-    $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $this->candidate_id = htmlspecialchars(strip_tags($this->candidate_id));
     $this->position_id = htmlspecialchars(strip_tags($this->position_id));
+    $this->vote_id = htmlspecialchars(strip_tags($this->vote_id));
 
     $stmt->bindParam(':id', $this->id);
-    $stmt->bindParam(':user_id', $this->user_id);
+    $stmt->bindParam(':candidate_id', $this->candidate_id);
     $stmt->bindParam(':position_id', $this->position_id);
+    $stmt->bindParam(':voter_id', $this->voter_id);
 
     if($stmt->execute()) {
       return true;

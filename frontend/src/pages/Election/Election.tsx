@@ -47,6 +47,7 @@ const Election = () => {
               return (
                 <Candidates
                   key={position.id}
+                  positionId={position.id}
                   title={position.name}
                   candidates={candidates}
                   onAddCandidateButtonClick={(title) =>

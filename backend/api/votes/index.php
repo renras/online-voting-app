@@ -24,8 +24,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $vote_item = array(
                 'id' => $id,
-                'user_id' => $user_id,
-                'position_id' => $position_id
+                'candidate_id' => $candidate_id,
+                'position_id' => $position_id,
+                'voter_id' => $voter_id
             );
 
             array_push($votes_arr, $vote_item);
@@ -48,8 +49,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $vote->user_id = $data->user_id;
+    $vote->candidate_id = $data->candidate_id;
     $vote->position_id = $data->position_id;
+    $vote->voter_id = $data->voter_id;
 
     if($vote->create()) {
         echo json_encode(
@@ -72,8 +74,9 @@ if($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $data = json_decode(file_get_contents("php://input"));
 
     $vote->id = $data->id;
-    $vote->user_id = $data->user_id;
+    $vote->candidate_id = $data->candidate_id;
     $vote->position_id = $data->position_id;
+    $vote->voter_id = $data->voter_id;
 
     if($vote->update()) {
         echo json_encode(

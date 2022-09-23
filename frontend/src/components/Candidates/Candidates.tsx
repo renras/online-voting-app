@@ -2,12 +2,19 @@ import styles from "./Candidates.module.scss";
 import add from "assets/icons/icon-add.svg";
 import { Candidate as CandidateType } from "types/candidate";
 import Card from "components/Card/Card";
+import axios from "axios";
+import { errorToast } from "utils/toast";
+import { User } from "types/user";
+import { Vote } from "types/vote";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: string;
   onAddCandidateButtonClick?: (title: string) => void;
   candidates: CandidateType[];
   isEditable?: boolean;
+  positionId: number;
+  votes?: Vote[];
 }
 
 const Candidate = ({
@@ -15,10 +22,50 @@ const Candidate = ({
   onAddCandidateButtonClick,
   candidates,
   isEditable,
+  positionId,
+  votes,
 }: Props) => {
+  const navigate = useNavigate();
   const handleAddCandidate = () => {
     onAddCandidateButtonClick && onAddCandidateButtonClick(title);
   };
+
+  const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
+
+  const handleVote = async (candidateId: number, positionId: number) => {
+    try {
+      await axios.post(`${process.env.REACT_APP_HOST}/votes/`, {
+        candidate_id: candidateId,
+        position_id: positionId,
+        voter_id: ova_user.id,
+      });
+      navigate(0);
+    } catch {
+      errorToast("There was an error voting for this candidate");
+    }
+  };
+
+  const isVoter = () => {
+    if (votes && votes.length > 0) {
+      return !votes?.some(
+        (vote) =>
+          vote.voter_id === ova_user.id && vote.position_id === positionId
+      );
+    }
+
+    return true;
+  };
+
+  const isCandidateVotedByVoter = (candidateId: number, voterId: number) => {
+    if (votes && votes.length > 0) {
+      return votes?.some(
+        (vote) => vote.voter_id === voterId && vote.candidate_id === candidateId
+      );
+    }
+
+    return false;
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading2}>{title}</h2>
@@ -31,6 +78,12 @@ const Candidate = ({
                   key={index}
                   name={candidate.name}
                   photo={candidate.photo}
+                  isVoter={isVoter()}
+                  onVote={() => handleVote(candidate.id, positionId)}
+                  candidateVoted={isCandidateVotedByVoter(
+                    candidate.id,
+                    ova_user.id
+                  )}
                 />
               );
             }

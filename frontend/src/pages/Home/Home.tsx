@@ -5,6 +5,7 @@ import styles from "./Home.module.scss";
 import Candidates from "components/Candidates/Candidates";
 import useCandidates from "hooks/useCandidates";
 import usePositions from "hooks/usePositions";
+import useVotes from "hooks/useVotes";
 import withAuthentication from "hoc/withAuthentication";
 
 const Home = () => {
@@ -27,9 +28,15 @@ const Home = () => {
     isError: isPositionsError,
     isLoading: isPositionsLoading,
   } = usePositions();
+  const {
+    votes,
+    isError: isVotesError,
+    isLoading: isVotesLoading,
+  } = useVotes();
 
-  if (isCandidatesLoading || isPositionsLoading) return <div>Loading...</div>;
-  if (isCandidatesError || isPositionsError)
+  if (isCandidatesLoading || isPositionsLoading || isVotesLoading)
+    return <div>Loading...</div>;
+  if (isCandidatesError || isPositionsError || isVotesError)
     return <div>There was an error loading the page</div>;
 
   return (
@@ -40,8 +47,10 @@ const Home = () => {
             return (
               <Candidates
                 key={position.id}
+                positionId={position.id}
                 title={position.name}
                 candidates={candidates}
+                votes={votes}
               />
             );
           })}
