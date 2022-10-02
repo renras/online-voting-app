@@ -24,6 +24,7 @@ const Card = ({
   console.log(votes);
   return (
     <article className={styles.container}>
+      <div className={styles.votes}>{votes} Votes</div>
       <div className={styles.imgWrapper}>
         <img src={photo} alt={`${name}`} />
       </div>
