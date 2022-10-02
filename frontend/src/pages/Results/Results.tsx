@@ -40,6 +40,7 @@ const Results = () => {
                 candidates={candidates}
                 isVoting={false}
                 votes={votes}
+                showResults
               />
             );
           })}

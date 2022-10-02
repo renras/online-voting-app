@@ -16,6 +16,7 @@ interface Props {
   positionId: number;
   votes?: Vote[];
   isVoting?: boolean;
+  showResults?: boolean;
 }
 
 const Candidate = ({
@@ -26,6 +27,7 @@ const Candidate = ({
   positionId,
   votes,
   isVoting = false,
+  showResults = false,
 }: Props) => {
   const navigate = useNavigate();
   const handleAddCandidate = () => {
@@ -76,6 +78,37 @@ const Candidate = ({
     return 0;
   };
 
+  const rankCandidateByVotes = (
+    candidateA: CandidateType,
+    candidateB: CandidateType
+  ) => {
+    const candidateAVotes = getVotes(candidateA.id);
+    const candidateBVotes = getVotes(candidateB.id);
+
+    if (candidateAVotes > candidateBVotes) {
+      return -1;
+    }
+
+    if (candidateAVotes < candidateBVotes) {
+      return 1;
+    }
+
+    return 0;
+  };
+
+  const sortPositionByVotes = (candidates: CandidateType[]) => {
+    return candidates.sort(rankCandidateByVotes);
+  };
+
+  const getCandidateRank = (candidateId: number) => {
+    const sortedCandidates = sortPositionByVotes(candidates);
+    const candidateIndex = sortedCandidates.findIndex(
+      (candidate) => candidate.id === candidateId
+    );
+
+    return candidateIndex + 1;
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading2}>{title}</h2>
@@ -89,9 +122,11 @@ const Candidate = ({
                   name={candidate.name}
                   photo={candidate.photo}
                   isVoting={isVoting}
+                  rank={getCandidateRank(candidate.id)}
                   isStillAbleToVote={isStillAbleToVote()}
                   votes={getVotes(candidate.id)}
                   onVote={() => handleVote(candidate.id, positionId)}
+                  showResults={showResults}
                   candidateVoted={isCandidateVotedByVoter(
                     candidate.id,
                     ova_user.id
