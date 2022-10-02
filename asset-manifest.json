@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/online-voting-app/static/css/main.2b0c12a1.css",
-    "main.js": "/online-voting-app/static/js/main.17dc482d.js",
+    "main.js": "/online-voting-app/static/js/main.78231605.js",
     "static/js/787.cda612ba.chunk.js": "/online-voting-app/static/js/787.cda612ba.chunk.js",
     "static/media/NotoSans-Medium.ttf": "/online-voting-app/static/media/NotoSans-Medium.a4c42b7a92bf0fdb8ec1.ttf",
     "static/media/Poppins-Regular.ttf": "/online-voting-app/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
@@ -22,11 +22,11 @@
     "static/media/icon-add.svg": "/online-voting-app/static/media/icon-add.3064cfd0d08923dc26a8780e93b17829.svg",
     "static/media/icon-home.svg": "/online-voting-app/static/media/icon-home.764f398a8a1ace2bada69e7444192071.svg",
     "main.2b0c12a1.css.map": "/online-voting-app/static/css/main.2b0c12a1.css.map",
-    "main.17dc482d.js.map": "/online-voting-app/static/js/main.17dc482d.js.map",
+    "main.78231605.js.map": "/online-voting-app/static/js/main.78231605.js.map",
     "787.cda612ba.chunk.js.map": "/online-voting-app/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2b0c12a1.css",
-    "static/js/main.17dc482d.js"
+    "static/js/main.78231605.js"
   ]
 }
