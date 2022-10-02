@@ -8,6 +8,7 @@ interface Props {
   isVoter?: boolean;
   onVote: MouseEventHandler<HTMLButtonElement>;
   candidateVoted: boolean;
+  votes?: number;
 }
 
 const Card = ({
@@ -16,7 +17,9 @@ const Card = ({
   isVoter = false,
   onVote,
   candidateVoted,
+  votes = 0,
 }: Props) => {
+  console.log(votes);
   return (
     <article className={styles.container}>
       <div className={styles.imgWrapper}>

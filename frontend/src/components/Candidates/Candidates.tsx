@@ -15,6 +15,7 @@ interface Props {
   isEditable?: boolean;
   positionId: number;
   votes?: Vote[];
+  isVoter?: boolean;
 }
 
 const Candidate = ({
@@ -24,6 +25,7 @@ const Candidate = ({
   isEditable,
   positionId,
   votes,
+  isVoter = false,
 }: Props) => {
   const navigate = useNavigate();
   const handleAddCandidate = () => {
@@ -45,7 +47,7 @@ const Candidate = ({
     }
   };
 
-  const isVoter = () => {
+  const isStillAbleToVote = () => {
     if (votes && votes.length > 0) {
       return !votes?.some(
         (vote) =>
@@ -66,6 +68,14 @@ const Candidate = ({
     return false;
   };
 
+  const getVotes = (candidateId: number) => {
+    if (votes && votes.length > 0) {
+      return votes?.filter((vote) => vote.candidate_id === candidateId).length;
+    }
+
+    return 0;
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading2}>{title}</h2>
@@ -78,7 +88,8 @@ const Candidate = ({
                   key={index}
                   name={candidate.name}
                   photo={candidate.photo}
-                  isVoter={isVoter()}
+                  isVoter={isVoter && isStillAbleToVote()}
+                  votes={getVotes(candidate.id)}
                   onVote={() => handleVote(candidate.id, positionId)}
                   candidateVoted={isCandidateVotedByVoter(
                     candidate.id,
