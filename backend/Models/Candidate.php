@@ -7,7 +7,6 @@ public $id;
 public $name;
 public $photo;
 public $position;
-public $votes;
 
 public function __construct($db) {
   $this->conn = $db;
@@ -38,7 +37,6 @@ public function read_single() {
   $this->name = $row['name'];
   $this->photo = $row['photo'];
   $this->position = $row['position'];
-  $this->votes = $row['votes'];
 }
 
 public function create() {

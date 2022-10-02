@@ -28,7 +28,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 'name' => $name,
                 'photo' => $photo,
                 'position' => $position,
-                'votes' => $votes
             );
 
             array_push($candidates_arr, $candidate_item);
