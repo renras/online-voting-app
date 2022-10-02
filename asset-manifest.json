@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/online-voting-app/static/css/main.2b0c12a1.css",
+    "main.js": "/online-voting-app/static/js/main.550807bf.js",
+    "static/js/787.cda612ba.chunk.js": "/online-voting-app/static/js/787.cda612ba.chunk.js",
+    "static/media/NotoSans-Medium.ttf": "/online-voting-app/static/media/NotoSans-Medium.a4c42b7a92bf0fdb8ec1.ttf",
+    "static/media/Poppins-Regular.ttf": "/online-voting-app/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
+    "static/media/Poppins-Medium.ttf": "/online-voting-app/static/media/Poppins-Medium.673ed42382ab264e0bf5.ttf",
+    "static/media/Poppins-SemiBold.ttf": "/online-voting-app/static/media/Poppins-SemiBold.ac8d04b620e54be9b0f0.ttf",
+    "static/media/Poppins-Bold.ttf": "/online-voting-app/static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
+    "static/media/polling-place.jpg": "/online-voting-app/static/media/polling-place.5bbc90e9edb44ecd695d.jpg",
+    "static/media/Nunito-Bold.ttf": "/online-voting-app/static/media/Nunito-Bold.f4338623f94e6079de97.ttf",
+    "static/media/icon-close.svg": "/online-voting-app/static/media/icon-close.d66104a465fbd6457f2c9d199c9119b2.svg",
+    "index.html": "/online-voting-app/index.html",
+    "static/media/icon-trash.svg": "/online-voting-app/static/media/icon-trash.c26f8d9b74ae7051556f3bab82784513.svg",
+    "static/media/icon-election-purple.svg": "/online-voting-app/static/media/icon-election-purple.f09eef44edea8756af39d56bd41d22a4.svg",
+    "static/media/icon-election.svg": "/online-voting-app/static/media/icon-election.01a917ed4b5a9e010b18c633385c9da1.svg",
+    "static/media/icon-results-purple.svg": "/online-voting-app/static/media/icon-results-purple.9ee04fd8ab0d2d5cdb3b26ae5c90bf92.svg",
+    "static/media/icon-results.svg": "/online-voting-app/static/media/icon-results.d5c97254baf6e7800393704f085fc7c5.svg",
+    "static/media/icon-plus.svg": "/online-voting-app/static/media/icon-plus.4ae35f42af25340ec6d125a81fb1d44b.svg",
+    "static/media/icon-home-purple.svg": "/online-voting-app/static/media/icon-home-purple.2f3da92c763b19ed58fdaec08ce7b457.svg",
+    "static/media/icon-add.svg": "/online-voting-app/static/media/icon-add.3064cfd0d08923dc26a8780e93b17829.svg",
+    "static/media/icon-home.svg": "/online-voting-app/static/media/icon-home.764f398a8a1ace2bada69e7444192071.svg",
+    "main.2b0c12a1.css.map": "/online-voting-app/static/css/main.2b0c12a1.css.map",
+    "main.550807bf.js.map": "/online-voting-app/static/js/main.550807bf.js.map",
+    "787.cda612ba.chunk.js.map": "/online-voting-app/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b0c12a1.css",
+    "static/js/main.550807bf.js"
+  ]
+}
