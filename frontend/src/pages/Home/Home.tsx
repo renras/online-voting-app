@@ -51,7 +51,7 @@ const Home = () => {
                 title={position.name}
                 candidates={candidates}
                 votes={votes}
-                isVoter
+                isVoting
               />
             );
           })}

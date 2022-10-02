@@ -15,7 +15,7 @@ interface Props {
   isEditable?: boolean;
   positionId: number;
   votes?: Vote[];
-  isVoter?: boolean;
+  isVoting?: boolean;
 }
 
 const Candidate = ({
@@ -25,7 +25,7 @@ const Candidate = ({
   isEditable,
   positionId,
   votes,
-  isVoter = false,
+  isVoting = false,
 }: Props) => {
   const navigate = useNavigate();
   const handleAddCandidate = () => {
@@ -88,7 +88,8 @@ const Candidate = ({
                   key={index}
                   name={candidate.name}
                   photo={candidate.photo}
-                  isVoter={isVoter && isStillAbleToVote()}
+                  isVoting={isVoting}
+                  isStillAbleToVote={isStillAbleToVote()}
                   votes={getVotes(candidate.id)}
                   onVote={() => handleVote(candidate.id, positionId)}
                   candidateVoted={isCandidateVotedByVoter(

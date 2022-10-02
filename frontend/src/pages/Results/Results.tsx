@@ -38,7 +38,7 @@ const Results = () => {
                 positionId={position.id}
                 title={position.name}
                 candidates={candidates}
-                isVoter={false}
+                isVoting={false}
                 votes={votes}
               />
             );

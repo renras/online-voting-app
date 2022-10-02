@@ -5,19 +5,21 @@ import { MouseEventHandler } from "react";
 interface Props {
   name: string;
   photo: string;
-  isVoter?: boolean;
+  isVoting?: boolean;
   onVote: MouseEventHandler<HTMLButtonElement>;
   candidateVoted: boolean;
   votes?: number;
+  isStillAbleToVote?: boolean;
 }
 
 const Card = ({
   name,
   photo,
-  isVoter = false,
+  isVoting = false,
   onVote,
   candidateVoted,
   votes = 0,
+  isStillAbleToVote = false,
 }: Props) => {
   console.log(votes);
   return (
@@ -27,7 +29,7 @@ const Card = ({
       </div>
       <div className={styles.content}>
         <p className={styles.name}>{name}</p>
-        {!candidateVoted && isVoter && (
+        {!candidateVoted && isVoting && isStillAbleToVote && (
           <Button
             size="small"
             theme="secondary"
@@ -37,7 +39,7 @@ const Card = ({
             Vote
           </Button>
         )}
-        {candidateVoted && (
+        {isVoting && candidateVoted && (
           <p className={styles.voted}>You voted for this candidate</p>
         )}
       </div>
