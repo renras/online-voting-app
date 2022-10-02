@@ -17,13 +17,15 @@ const withAuthentication =
           const ova_user = JSON.parse(
             `${localStorage.getItem("ova_user")}`
           ) as User;
+
           const users = (
             await axios.get(`${process.env.REACT_APP_HOST}/users/`)
           ).data as User[];
 
-          const user = users.find(
-            (user) => user.username === ova_user.username
-          );
+          const user =
+            users.length > 0
+              ? users.find((user) => user.username === ova_user.username)
+              : null;
 
           if (user && user.password === ova_user.password) {
             setIsAuthenticated(true);

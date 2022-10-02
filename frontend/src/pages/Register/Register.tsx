@@ -2,7 +2,7 @@ import styles from "./Register.module.scss";
 import Label from "components/Label/Label";
 import Input from "components/Input/Input";
 import Button from "components/Button/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import LoginLayout from "components/Layout/LoginLayout/LoginLayout";
 import { useForm } from "react-hook-form";
 import { errorToast } from "utils/toast";
@@ -66,18 +66,18 @@ const Login = () => {
     <LoginLayout>
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.headings}>
-          <a
-            href="/login"
+          <Link
+            to="/login"
             className={pathname.includes("login") ? styles.active : ""}
           >
             Login
-          </a>
-          <a
-            href="/register"
+          </Link>
+          <Link
+            to="/register"
             className={pathname.includes("register") ? styles.active : ""}
           >
             Register
-          </a>
+          </Link>
         </div>
 
         {/* username */}

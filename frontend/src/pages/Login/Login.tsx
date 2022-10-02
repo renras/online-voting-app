@@ -9,6 +9,7 @@ import axios from "axios";
 import { errorToast } from "utils/toast";
 import { User } from "types/user";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface FormData {
   username: string;
@@ -24,6 +25,8 @@ const Login = () => {
     const users = (await (
       await axios.get(`${process.env.REACT_APP_HOST}/users/`)
     ).data) as User[];
+
+    console.log(users);
 
     const user =
       users.length > 0
@@ -49,18 +52,19 @@ const Login = () => {
     <LoginLayout>
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.headings}>
-          <a
-            href="/login"
+          <Link
+            to="/login"
             className={pathname.includes("login") ? styles.active : ""}
           >
             Login
-          </a>
-          <a
-            href="/register"
+          </Link>
+
+          <Link
+            to="/register"
             className={pathname.includes("register") ? styles.active : ""}
           >
             Register
-          </a>
+          </Link>
         </div>
 
         {/* username */}

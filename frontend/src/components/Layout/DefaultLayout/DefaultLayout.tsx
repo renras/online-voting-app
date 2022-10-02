@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import styles from "./DefaultLayout.module.scss";
 import Button from "components/Button/Button";
 import { User } from "types/user";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   children: ReactNode;
@@ -10,11 +11,14 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("ova_user");
-    window.location.href = "/login";
+    navigate("/login", { replace: true });
   };
+
+  if (!ova_user) return <div>Not Authorized</div>;
 
   return (
     <div className={styles.layout}>

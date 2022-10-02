@@ -6,7 +6,6 @@ class User {
   public $id;
   public $username;
   public $password;
-  public $is_admin;
 
   public function __construct($db) {
     $this->conn = $db;
@@ -36,7 +35,6 @@ class User {
     $this->id = $row['id'];
     $this->username = $row['username'];
     $this->password = $row['password'];
-    $this->is_admin = $row['is_admin'];
   }
 
   public function create() {

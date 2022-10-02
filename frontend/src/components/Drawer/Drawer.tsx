@@ -6,7 +6,7 @@ import iconResults from "assets/icons/icon-results.svg";
 import iconElectionPurple from "assets/icons/icon-election-purple.svg";
 import iconHomePurple from "assets/icons/icon-home-purple.svg";
 import iconResultsPurple from "assets/icons/icon-results-purple.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { User } from "types/user";
 
 const Drawer = () => {
@@ -22,26 +22,24 @@ const Drawer = () => {
     <aside className={styles.drawer}>
       <img src={logo} alt="logo" />
       <nav className={styles.nav}>
-        <a href="/" className={pathname === "/" ? styles.active : ""}>
+        <Link to="/" className={pathname === "/" ? styles.active : ""}>
           <img src={homeIcon} alt="home icon" />
           Home
-        </a>
-        {ova_user.is_admin && (
-          <a
-            href="/election"
-            className={pathname === "/election" ? styles.active : ""}
-          >
-            <img src={electionIcon} alt="election icon" />
-            Election
-          </a>
-        )}
-        <a
-          href="results"
+        </Link>
+        <Link
+          to="/election"
+          className={pathname === "/election" ? styles.active : ""}
+        >
+          <img src={electionIcon} alt="election icon" />
+          Election
+        </Link>
+        <Link
+          to="/results"
           className={pathname === "/results" ? styles.active : ""}
         >
           <img src={resultsIcon} alt="results icon" />
           Live Results
-        </a>
+        </Link>
       </nav>
     </aside>
   );
