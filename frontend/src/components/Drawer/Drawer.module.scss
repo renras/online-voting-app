@@ -11,7 +11,12 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
   padding: 32px;
+  height: 100%;
 }
 
 .closeButton {
@@ -48,8 +53,32 @@
   color: $purple;
 }
 
+.bottomActions {
+  width: 100%;
+  padding-top: 32px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user {
+  color: #fff;
+}
+
+.logoutButton {
+  width: 192px;
+  background-color: #fff;
+  color: #8575ff;
+  border-radius: 16px;
+}
+
 @media screen and (min-width: 1024px) {
   .closeButton {
+    display: none;
+  }
+
+  .bottomActions {
     display: none;
   }
 }

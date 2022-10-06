@@ -10,6 +10,8 @@ import { useLocation, Link } from "react-router-dom";
 import { User } from "types/user";
 import IconClose from "assets/icons/icon-close-light.svg";
 import { MouseEventHandler } from "react";
+import Button from "components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   onClose?: MouseEventHandler<HTMLButtonElement>;
@@ -24,6 +26,13 @@ const Drawer = ({ onClose, className }: Props) => {
     pathname === "/election" ? iconElectionPurple : iconElection;
   const resultsIcon = pathname === "/results" ? iconResultsPurple : iconResults;
   const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("ova_user");
+    navigate("/login", { replace: true });
+  };
 
   return (
     <aside className={`${styles.drawer} ${className}`}>
@@ -52,6 +61,20 @@ const Drawer = ({ onClose, className }: Props) => {
             Live Results
           </Link>
         </nav>
+
+        <div className={styles.bottomActions}>
+          <div className={styles.user}>
+            <p>Welcome, &nbsp;{ova_user.username}!</p>
+          </div>
+
+          <Button
+            className={styles.logoutButton}
+            size="small"
+            onClick={() => handleLogout()}
+          >
+            Logout
+          </Button>
+        </div>
       </div>
     </aside>
   );

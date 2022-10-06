@@ -42,7 +42,11 @@ const Home = () => {
   return (
     <Layout>
       <div className={styles.container}>
-        {positions.length > 0 &&
+        {!(candidates.length > 0) && (
+          <h2 className={styles.heading2}>No candidates added...</h2>
+        )}
+
+        {candidates.length > 0 &&
           positions.map((position) => {
             return (
               <Candidates
