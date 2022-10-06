@@ -8,8 +8,15 @@ import iconHomePurple from "assets/icons/icon-home-purple.svg";
 import iconResultsPurple from "assets/icons/icon-results-purple.svg";
 import { useLocation, Link } from "react-router-dom";
 import { User } from "types/user";
+import IconClose from "assets/icons/icon-close-light.svg";
+import { MouseEventHandler } from "react";
 
-const Drawer = () => {
+interface Props {
+  onClose?: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+}
+
+const Drawer = ({ onClose, className }: Props) => {
   const { pathname } = useLocation();
 
   const homeIcon = pathname === "/" ? iconHomePurple : iconHome;
@@ -19,28 +26,33 @@ const Drawer = () => {
   const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
 
   return (
-    <aside className={styles.drawer}>
-      <img src={logo} alt="logo" />
-      <nav className={styles.nav}>
-        <Link to="/" className={pathname === "/" ? styles.active : ""}>
-          <img src={homeIcon} alt="home icon" />
-          Home
-        </Link>
-        <Link
-          to="/election"
-          className={pathname === "/election" ? styles.active : ""}
-        >
-          <img src={electionIcon} alt="election icon" />
-          Election
-        </Link>
-        <Link
-          to="/results"
-          className={pathname === "/results" ? styles.active : ""}
-        >
-          <img src={resultsIcon} alt="results icon" />
-          Live Results
-        </Link>
-      </nav>
+    <aside className={`${styles.drawer} ${className}`}>
+      <div className={styles.content}>
+        <button className={styles.closeButton} onClick={onClose}>
+          <img src={IconClose} alt="close drawer" />
+        </button>
+        <img src={logo} alt="logo" />
+        <nav className={styles.nav}>
+          <Link to="/" className={pathname === "/" ? styles.active : ""}>
+            <img src={homeIcon} alt="home icon" />
+            Home
+          </Link>
+          <Link
+            to="/election"
+            className={pathname === "/election" ? styles.active : ""}
+          >
+            <img src={electionIcon} alt="election icon" />
+            Election
+          </Link>
+          <Link
+            to="/results"
+            className={pathname === "/results" ? styles.active : ""}
+          >
+            <img src={resultsIcon} alt="results icon" />
+            Live Results
+          </Link>
+        </nav>
+      </div>
     </aside>
   );
 };

@@ -1,17 +1,48 @@
 @use "styles/typography";
 
-.content {
-  margin-left: 272px;
+.mobileDrawer {
+  display: block;
+  position: relative;
+}
+
+.animation {
+  animation: slidein 0.5s;
+}
+
+@keyframes slidein {
+  from {
+    width: 0px;
+  }
+
+  to {
+    width: 272px;
+  }
+}
+
+.drawer {
+  display: none;
 }
 
 .header {
   padding: 1rem 2rem;
   width: 100%;
   display: flex;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.menuButton {
+  width: 32px;
+  height: 32px;
+}
+
+.menuButton img {
+  width: 100%;
 }
 
 .heading1 {
   @extend %heading1;
+  margin-left: auto;
 }
 
 .avatar {
@@ -20,7 +51,7 @@
 }
 
 .user {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 1rem;
   font-size: 1rem;
@@ -28,5 +59,36 @@
 }
 
 .logoutButton {
+  display: none;
   margin-left: 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .menuButton {
+    display: none;
+  }
+
+  .mobileDrawer {
+    display: none;
+  }
+
+  .drawer {
+    display: block;
+  }
+
+  .content {
+    margin-left: 272px;
+  }
+
+  .user {
+    display: flex;
+  }
+
+  .logoutButton {
+    display: block;
+  }
+
+  .heading1 {
+    margin-left: 0;
+  }
 }

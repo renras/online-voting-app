@@ -6,7 +6,24 @@
   height: 100vh;
   background-color: $purple;
   width: 272px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.content {
   padding: 32px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+}
+
+.closeButton img {
+  width: 100%;
 }
 
 .nav {
@@ -29,4 +46,10 @@
   background-color: #fff;
   border-radius: 16px;
   color: $purple;
+}
+
+@media screen and (min-width: 1024px) {
+  .closeButton {
+    display: none;
+  }
 }
