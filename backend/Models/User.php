@@ -6,6 +6,7 @@ class User {
   public $id;
   public $username;
   public $password;
+  public $is_admin;
 
   public function __construct($db) {
     $this->conn = $db;
@@ -35,6 +36,7 @@ class User {
     $this->id = $row['id'];
     $this->username = $row['username'];
     $this->password = $row['password'];
+    $this->is_admin = $row['is_admin'];
   }
 
   public function create() {
@@ -58,17 +60,19 @@ class User {
   }
 
   public function update() {
-    $query = 'UPDATE ' . $this->table . ' SET username = :username, password = :password WHERE id = :id';
+    $query = 'UPDATE ' . $this->table . ' SET username = :username, password = :password, is_admin = :is_admin WHERE id = :id';
 
     $stmt = $this->conn->prepare($query);
 
     $this->username = htmlspecialchars(strip_tags($this->username));
     $this->password = htmlspecialchars(strip_tags($this->password));
     $this->id = htmlspecialchars(strip_tags($this->id));
+    $this->is_admin = htmlspecialchars(strip_tags($this->is_admin));
 
     $stmt->bindParam(':username', $this->username);
     $stmt->bindParam(':password', $this->password);
     $stmt->bindParam(':id', $this->id);
+    $stmt->bindParam(':is_admin', $this->is_admin);
 
     if($stmt->execute()) {
       return true;

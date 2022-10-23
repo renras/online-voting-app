@@ -27,6 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 'id' => $id,
                 'username' => $username,
                 'password' => $password,
+                'is_admin' => $is_admin
             );
 
             array_push($users_arr, $user_item);
@@ -76,6 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $user->id = $data->id;
     $user->username = $data->username;
     $user->password = $data->password;
+    $user->is_admin = $data->is_admin;
 
     if($user->update()) {
         echo json_encode(
