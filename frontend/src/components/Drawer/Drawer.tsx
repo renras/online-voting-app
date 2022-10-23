@@ -46,13 +46,15 @@ const Drawer = ({ onClose, className }: Props) => {
             <img src={homeIcon} alt="home icon" />
             Home
           </Link>
-          <Link
-            to="/election"
-            className={pathname === "/election" ? styles.active : ""}
-          >
-            <img src={electionIcon} alt="election icon" />
-            Election
-          </Link>
+          {ova_user?.is_admin === 1 && (
+            <Link
+              to="/election"
+              className={pathname === "/election" ? styles.active : ""}
+            >
+              <img src={electionIcon} alt="election icon" />
+              Election
+            </Link>
+          )}
           <Link
             to="/results"
             className={pathname === "/results" ? styles.active : ""}
