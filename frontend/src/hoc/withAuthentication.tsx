@@ -14,10 +14,12 @@ const withAuthentication =
     useEffect(() => {
       (async () => {
         try {
+          // check if ova_api exists in local storage
           const ova_user = JSON.parse(
             `${localStorage.getItem("ova_user")}`
           ) as User;
 
+          // if ova_api is valid
           const users = (
             await axios.get(`${process.env.REACT_APP_HOST}/users/`)
           ).data as User[];

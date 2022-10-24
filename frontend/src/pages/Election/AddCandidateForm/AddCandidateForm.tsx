@@ -31,6 +31,7 @@ const AddCandidateForm = ({ onClose, position }: Props) => {
   const { register, handleSubmit } = useForm<CandidateFormData>();
   const navigate = useNavigate();
 
+  // add candidate form submit handler
   const onSubmit = handleSubmit(async (data) => {
     if (!file) return;
 

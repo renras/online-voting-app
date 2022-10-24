@@ -21,13 +21,16 @@ const Login = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const navigate = useNavigate();
 
+  // submit handler
   const onSubmit = handleSubmit(async (data) => {
+    // get users from api
     const users = (await (
       await axios.get(`${process.env.REACT_APP_HOST}/users/`)
     ).data) as User[];
 
     console.log(users);
 
+    // check if username and password is correct
     const user =
       users.length > 0
         ? users.find(
@@ -36,11 +39,13 @@ const Login = () => {
           )
         : null;
 
+    // if user exists
     if (!user) {
       errorToast("Invalid username or password");
       return;
     }
 
+    // if user exists, save user to local storage
     if (user) {
       localStorage.setItem("ova_user", JSON.stringify(user));
       window.location.href = "/";

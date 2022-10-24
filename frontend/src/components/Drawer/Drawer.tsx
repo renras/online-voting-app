@@ -29,10 +29,13 @@ const Drawer = ({ onClose, className }: Props) => {
 
   const navigate = useNavigate();
 
+  // handles logout
   const handleLogout = () => {
     localStorage.removeItem("ova_user");
     navigate("/login", { replace: true });
   };
+
+  console.log(ova_user.is_admin);
 
   return (
     <aside className={`${styles.drawer} ${className}`}>

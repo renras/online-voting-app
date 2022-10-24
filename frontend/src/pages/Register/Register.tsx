@@ -21,22 +21,27 @@ const Login = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const navigate = useNavigate();
 
+  // submit handler
   const onSubmit = handleSubmit(async (data) => {
+    // check if passwords match
     if (data.password !== data.confirm_password) {
       errorToast("Passwords do not match");
       return;
     }
 
     try {
+      // get users from api
       const users = (await (
         await axios.get(`${process.env.REACT_APP_HOST}/users/`)
       ).data) as User[];
 
+      // check if username already exists
       const user =
         users.length > 0
           ? users.find((user) => user.username === data.username)
           : null;
 
+      // if username already exists, throw error
       if (user) {
         errorToast("Username already exists");
         return;
@@ -52,6 +57,7 @@ const Login = () => {
         await axios.get(`${process.env.REACT_APP_HOST}/users/`)
       ).data) as User[];
 
+      // find created user in users array
       const newUser = newUsers.find((user) => user.username === data.username);
 
       localStorage.setItem("ova_user", JSON.stringify(newUser));

@@ -25,6 +25,7 @@ const Card = ({
   rank = 0,
   showResults = false,
 }: Props) => {
+  // handles color depending on rank
   const getColorByRank = (rank: number) => {
     switch (rank) {
       case 1:

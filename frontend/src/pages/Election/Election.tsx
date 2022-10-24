@@ -14,11 +14,14 @@ const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [activePosition, setActivePosition] = useState<string | null>("");
 
+  // fetch positions
   const {
     positions,
     isError: isPositionsError,
     isLoading: isPositionsLoading,
   } = usePositions();
+
+  // fetch candidates
   const {
     candidates,
     isError: isCandidatesError,

@@ -97,7 +97,12 @@ const Candidate = ({
   };
 
   const sortPositionByVotes = (candidates: CandidateType[]) => {
-    return candidates.sort(rankCandidateByVotes);
+    // return candidates that matches position id
+    const filteredCandidates = candidates.filter(
+      (candidate) => candidate.position === title
+    );
+
+    return filteredCandidates.sort(rankCandidateByVotes);
   };
 
   const getCandidateRank = (candidateId: number) => {
