@@ -17,6 +17,7 @@ interface Props {
   votes?: Vote[];
   isVoting?: boolean;
   showResults?: boolean;
+  showTitle?: boolean;
 }
 
 const Candidate = ({
@@ -28,6 +29,7 @@ const Candidate = ({
   votes,
   isVoting = false,
   showResults = false,
+  showTitle = true,
 }: Props) => {
   const navigate = useNavigate();
   const handleAddCandidate = () => {
@@ -116,7 +118,7 @@ const Candidate = ({
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading2}>{title}</h2>
+      {showTitle && <h2 className={styles.heading2}>{title}</h2>}
       <div className={styles.content}>
         {candidates.length > 0 &&
           candidates.map((candidate, index) => {

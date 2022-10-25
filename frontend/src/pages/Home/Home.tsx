@@ -42,23 +42,23 @@ const Home = () => {
   return (
     <Layout>
       <div className={styles.container}>
-        {!(candidates.length > 0) && (
-          <h2 className={styles.heading2}>No candidates added...</h2>
-        )}
+        {positions.map((position) => {
+          const filteredCandidates = candidates.filter(
+            (candidate) => candidate.position === position.name
+          );
 
-        {candidates.length > 0 &&
-          positions.map((position) => {
-            return (
-              <Candidates
-                key={position.id}
-                positionId={position.id}
-                title={position.name}
-                candidates={candidates}
-                votes={votes}
-                isVoting
-              />
-            );
-          })}
+          return (
+            <Candidates
+              key={position.id}
+              positionId={position.id}
+              title={position.name}
+              candidates={filteredCandidates}
+              votes={votes}
+              isVoting
+              showTitle={filteredCandidates.length > 0}
+            />
+          );
+        })}
       </div>
     </Layout>
   );
