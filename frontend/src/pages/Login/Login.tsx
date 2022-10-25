@@ -2,14 +2,12 @@ import styles from "./Login.module.scss";
 import Label from "components/Label/Label";
 import Input from "components/Input/Input";
 import Button from "components/Button/Button";
-import { useLocation } from "react-router-dom";
 import LoginLayout from "components/Layout/LoginLayout/LoginLayout";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { errorToast } from "utils/toast";
 import { User } from "types/user";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 interface FormData {
   username: string;
@@ -17,7 +15,6 @@ interface FormData {
 }
 
 const Login = () => {
-  const { pathname } = useLocation();
   const { register, handleSubmit } = useForm<FormData>();
   const navigate = useNavigate();
 
@@ -54,21 +51,7 @@ const Login = () => {
   return (
     <LoginLayout>
       <form className={styles.form} onSubmit={onSubmit}>
-        <div className={styles.headings}>
-          <Link
-            to="/login"
-            className={pathname.includes("login") ? styles.active : ""}
-          >
-            Login
-          </Link>
-
-          <Link
-            to="/register"
-            className={pathname.includes("register") ? styles.active : ""}
-          >
-            Register
-          </Link>
-        </div>
+        <h2 className={styles.heading}>Login</h2>
 
         {/* username */}
         <Label htmlFor="username" className={styles.label}>
