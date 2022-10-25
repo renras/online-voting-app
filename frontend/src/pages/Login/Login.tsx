@@ -28,8 +28,6 @@ const Login = () => {
       await axios.get(`${process.env.REACT_APP_HOST}/users/`)
     ).data) as User[];
 
-    console.log(users);
-
     // check if username and password is correct
     const user =
       users.length > 0

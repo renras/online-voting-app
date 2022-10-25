@@ -65,4 +65,51 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+// put request
+if($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $database = new Database();
+    $db = $database->connect();
+
+    $candidate = new Candidate($db);
+    $data = json_decode(file_get_contents("php://input"));
+
+    $candidate->id = $data->id;
+    $candidate->name = $data->name;
+    $candidate->photo = $data->photo;
+    $candidate->position = $data->position;
+
+    if($candidate->update()) {
+        echo json_encode(
+            array('message' => 'Candidate Updated')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Candidate Not Updated')
+        );
+    }
+}
+
+// delete request
+if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    $database = new Database();
+    $db = $database->connect();
+
+    $candidate = new Candidate($db);
+
+    $data = json_decode(file_get_contents("php://input"));
+
+    $candidate->id = $data->id;
+
+    if($candidate->delete()) {
+        echo json_encode(
+            array('message' => 'User Deleted')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'User Not Deleted')
+        );
+    }
+}
 ?>
+
+
