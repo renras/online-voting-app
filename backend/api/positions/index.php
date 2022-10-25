@@ -59,4 +59,49 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
     }
 }
+
+// put request
+if($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $database = new Database();
+    $db = $database->connect();
+
+    $position = new Position($db);
+
+    $data = json_decode(file_get_contents("php://input"));
+
+    $position->id = $data->id;
+    $position->name = $data->name;
+
+    if($position->update()) {
+        echo json_encode(
+            array('message' => 'Position Updated')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Position Not Updated')
+        );
+    }
+}
+
+// delete request
+if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    $database = new Database();
+    $db = $database->connect();
+
+    $position = new Position($db);
+
+    $data = json_decode(file_get_contents("php://input"));
+
+    $position->id = $data->id;
+
+    if($position->delete()) {
+        echo json_encode(
+            array('message' => 'Position Deleted')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Position Not Deleted')
+        );
+    }
+}
 ?>
