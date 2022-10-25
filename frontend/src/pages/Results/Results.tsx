@@ -30,26 +30,27 @@ const Results = () => {
   return (
     <Layout>
       <div className={styles.container}>
-        {positions.map((position) => {
-          const filteredCandidates =
-            candidates.length > 0
-              ? candidates.filter(
-                  (candidate) => candidate.position === position.id
-                )
-              : [];
+        {positions.length > 0 &&
+          positions.map((position) => {
+            const filteredCandidates =
+              candidates.length > 0
+                ? candidates.filter(
+                    (candidate) => candidate.position === position.id
+                  )
+                : [];
 
-          return (
-            <Candidates
-              key={position.id}
-              position={position}
-              candidates={filteredCandidates}
-              isVoting={false}
-              votes={votes}
-              showResults
-              showTitle={filteredCandidates.length > 0}
-            />
-          );
-        })}
+            return (
+              <Candidates
+                key={position.id}
+                position={position}
+                candidates={filteredCandidates}
+                isVoting={false}
+                votes={votes}
+                showResults
+                showTitle={filteredCandidates.length > 0}
+              />
+            );
+          })}
       </div>
     </Layout>
   );
