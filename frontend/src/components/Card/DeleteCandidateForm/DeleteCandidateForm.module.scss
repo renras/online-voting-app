@@ -1,0 +1,50 @@
+@use "styles/typography";
+
+.form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+.heading {
+  @extend %heading2;
+}
+
+.label {
+  color: #3d3d3d;
+  margin-top: 2rem;
+  display: block;
+}
+
+.input {
+  margin-top: 0.5rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+  margin-top: 3rem;
+  width: 100%;
+  justify-content: center;
+  background-color: #dc3545;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+  opacity: 50%;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.icon {
+  width: 100%;
+}

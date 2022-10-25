@@ -10,6 +10,12 @@
   flex-direction: column;
   padding: 13px;
   border-radius: 10px;
+
+  &:hover {
+    .actions {
+      display: flex;
+    }
+  }
 }
 
 .imgWrapper {
@@ -86,4 +92,12 @@
 
 .default {
   background-color: black;
+}
+
+.actions {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  gap: 0.5rem;
 }

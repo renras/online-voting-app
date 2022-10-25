@@ -25,7 +25,7 @@ interface Props {
 const Candidate = ({
   onAddCandidateButtonClick,
   candidates,
-  isEditable,
+  isEditable = false,
   position,
   votes,
   isVoting = false,
@@ -152,6 +152,8 @@ const Candidate = ({
                     ova_user.id
                   )}
                   isAdmin={ova_user.is_admin}
+                  isEditable={isEditable}
+                  id={candidate.id}
                 />
               );
             }
