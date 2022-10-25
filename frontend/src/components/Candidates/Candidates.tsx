@@ -7,33 +7,35 @@ import { errorToast } from "utils/toast";
 import { User } from "types/user";
 import { Vote } from "types/vote";
 import { useNavigate } from "react-router-dom";
+import { MdModeEditOutline } from "react-icons/md";
+import { Position } from "types/position";
 
 interface Props {
-  title: string;
   onAddCandidateButtonClick?: (title: string) => void;
   candidates: CandidateType[];
   isEditable?: boolean;
-  positionId: number;
+  position: Position;
   votes?: Vote[];
   isVoting?: boolean;
   showResults?: boolean;
   showTitle?: boolean;
+  onUpdatePositionClick?: (position: Position) => void;
 }
 
 const Candidate = ({
-  title,
   onAddCandidateButtonClick,
   candidates,
   isEditable,
-  positionId,
+  position,
   votes,
   isVoting = false,
   showResults = false,
   showTitle = true,
+  onUpdatePositionClick,
 }: Props) => {
   const navigate = useNavigate();
   const handleAddCandidate = () => {
-    onAddCandidateButtonClick && onAddCandidateButtonClick(title);
+    onAddCandidateButtonClick && onAddCandidateButtonClick(position.name);
   };
 
   const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
@@ -55,7 +57,7 @@ const Candidate = ({
     if (votes && votes.length > 0) {
       return !votes?.some(
         (vote) =>
-          vote.voter_id === ova_user.id && vote.position_id === positionId
+          vote.voter_id === ova_user.id && vote.position_id === position.id
       );
     }
 
@@ -101,7 +103,7 @@ const Candidate = ({
   const sortPositionByVotes = (candidates: CandidateType[]) => {
     // return candidates that matches position id
     const filteredCandidates = candidates.filter(
-      (candidate) => candidate.position === title
+      (candidate) => candidate.position === position.name
     );
 
     return filteredCandidates.sort(rankCandidateByVotes);
@@ -118,11 +120,22 @@ const Candidate = ({
 
   return (
     <div className={styles.container}>
-      {showTitle && <h2 className={styles.heading2}>{title}</h2>}
+      {showTitle && (
+        <div className={styles.headingContainer}>
+          <h2 className={styles.heading2}>{position.name}</h2>
+          <button
+            onClick={() =>
+              onUpdatePositionClick && onUpdatePositionClick(position)
+            }
+          >
+            <MdModeEditOutline size={24} color="#8575ff" />
+          </button>
+        </div>
+      )}
       <div className={styles.content}>
         {candidates.length > 0 &&
           candidates.map((candidate, index) => {
-            if (candidate.position === title) {
+            if (candidate.position === position.name) {
               return (
                 <Card
                   key={index}
@@ -132,7 +145,7 @@ const Candidate = ({
                   rank={getCandidateRank(candidate.id)}
                   isStillAbleToVote={isStillAbleToVote()}
                   votes={getVotes(candidate.id)}
-                  onVote={() => handleVote(candidate.id, positionId)}
+                  onVote={() => handleVote(candidate.id, position.id)}
                   showResults={showResults}
                   candidateVoted={isCandidateVotedByVoter(
                     candidate.id,
@@ -152,7 +165,7 @@ const Candidate = ({
             onClick={handleAddCandidate}
           >
             <img src={add} alt="add candidate" />
-            <p>Add {title}</p>
+            <p>Add {position.name}</p>
           </button>
         )}
       </div>

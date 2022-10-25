@@ -38,8 +38,7 @@ const Results = () => {
           return (
             <Candidates
               key={position.id}
-              positionId={position.id}
-              title={position.name}
+              position={position}
               candidates={filteredCandidates}
               isVoting={false}
               votes={votes}
