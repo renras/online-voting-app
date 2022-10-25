@@ -31,9 +31,12 @@ const Results = () => {
     <Layout>
       <div className={styles.container}>
         {positions.map((position) => {
-          const filteredCandidates = candidates.filter(
-            (candidate) => candidate.position === position.id
-          );
+          const filteredCandidates =
+            candidates.length > 0
+              ? candidates.filter(
+                  (candidate) => candidate.position === position.id
+                )
+              : [];
 
           return (
             <Candidates

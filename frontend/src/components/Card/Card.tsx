@@ -6,6 +6,7 @@ import { IoMdTrash } from "react-icons/io";
 import Modal from "components/Modal/Modal";
 import { useState } from "react";
 import DeleteCandidateForm from "components/Card/DeleteCandidateForm/DeleteCandidateForm";
+import UpdateCandidateForm from "components/Card/UpdateCandidateForm/UpdateCandidateForm";
 
 interface Props {
   id?: number;
@@ -20,6 +21,7 @@ interface Props {
   showResults?: boolean;
   isAdmin?: number;
   isEditable?: boolean;
+  positionId?: number;
 }
 
 const Card = ({
@@ -35,8 +37,10 @@ const Card = ({
   showResults = false,
   isAdmin = 0,
   isEditable = false,
+  positionId,
 }: Props) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   // handles color depending on rank
   const getColorByRank = (rank: number) => {
@@ -73,7 +77,7 @@ const Card = ({
         {showResults && <div className={styles.votes}>{votes} Votes</div>}
         {isEditable && isAdmin && (
           <div className={styles.actions}>
-            <button>
+            <button onClick={() => setIsUpdating(true)}>
               <MdModeEditOutline size={24} color="#8575ff" />
             </button>
             <button onClick={() => setIsDeleting(true)}>
@@ -112,6 +116,17 @@ const Card = ({
           <DeleteCandidateForm
             onClose={() => setIsDeleting(false)}
             candidateId={id}
+          />
+        </Modal>
+      )}
+      {isUpdating && (
+        <Modal>
+          <UpdateCandidateForm
+            id={id}
+            name={name}
+            photo={photo}
+            onClose={() => setIsUpdating(false)}
+            positionId={positionId}
           />
         </Modal>
       )}

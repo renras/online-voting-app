@@ -11,7 +11,7 @@ interface Props {
   candidateId?: number;
 }
 
-const AddPositionForm = ({ onClose, candidateId }: Props) => {
+const DeleteCandidateForm = ({ onClose, candidateId }: Props) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
@@ -22,7 +22,7 @@ const AddPositionForm = ({ onClose, candidateId }: Props) => {
 
       const config = {
         method: "delete",
-        url: "http://localhost/online-voting-app/backend/api/candidates/",
+        url: `${process.env.REACT_APP_HOST}/candidates/`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -55,4 +55,4 @@ const AddPositionForm = ({ onClose, candidateId }: Props) => {
   );
 };
 
-export default AddPositionForm;
+export default DeleteCandidateForm;

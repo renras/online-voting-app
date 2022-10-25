@@ -35,8 +35,6 @@ const Drawer = ({ onClose, className }: Props) => {
     navigate("/login", { replace: true });
   };
 
-  console.log(ova_user.is_admin);
-
   return (
     <aside className={`${styles.drawer} ${className}`}>
       <div className={styles.content}>

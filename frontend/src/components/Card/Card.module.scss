@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
   max-width: 305px;
-  height: 230px;
+  min-height: 230px;
   box-shadow: $shadow;
   display: inline-flex;
   flex-direction: column;

@@ -9,6 +9,7 @@ import { Vote } from "types/vote";
 import { useNavigate } from "react-router-dom";
 import { MdModeEditOutline } from "react-icons/md";
 import { Position } from "types/position";
+import { IoMdTrash } from "react-icons/io";
 
 interface Props {
   onAddCandidateButtonClick?: (positionId: number) => void;
@@ -100,6 +101,22 @@ const Candidate = ({
     return 0;
   };
 
+  // const getRankedCandidate = () => {
+  //   console.log(candidates);
+  //   const newCandidates: any = [];
+
+  //   candidates.forEach((candidate) => {
+  //     const votes = getVotes(candidate.id);
+
+  //     newCandidates.push({
+  //       candidate: candidate,
+  //       votes,
+  //     });
+  //   });
+  // };
+
+  // getRankedCandidate();
+
   const sortPositionByVotes = (candidates: CandidateType[]) => {
     // return candidates that matches position id
     const filteredCandidates = candidates.filter(
@@ -118,18 +135,49 @@ const Candidate = ({
     return candidateIndex + 1;
   };
 
+  const handleDeletePosition = async () => {
+    try {
+      const data = JSON.stringify({
+        id: position.id,
+      });
+
+      const config = {
+        method: "delete",
+        url: `${process.env.REACT_APP_HOST}/positions/`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      await axios(config);
+      navigate(0);
+    } catch {
+      errorToast(
+        "Failed to delete position. Make sure all candidates are removed."
+      );
+    }
+  };
+
   return (
     <div className={styles.container}>
       {showTitle && (
         <div className={styles.headingContainer}>
           <h2 className={styles.heading2}>{position.name}</h2>
-          <button
-            onClick={() =>
-              onUpdatePositionClick && onUpdatePositionClick(position)
-            }
-          >
-            <MdModeEditOutline size={24} color="#8575ff" />
-          </button>
+          {ova_user.is_admin === 1 && isEditable && (
+            <>
+              <button
+                onClick={() =>
+                  onUpdatePositionClick && onUpdatePositionClick(position)
+                }
+              >
+                <MdModeEditOutline size={24} color="#8575ff" />
+              </button>
+              <button onClick={() => handleDeletePosition()}>
+                <IoMdTrash color="#dc3545" size={24} />
+              </button>
+            </>
+          )}
         </div>
       )}
       <div className={styles.content}>
@@ -154,6 +202,7 @@ const Candidate = ({
                   isAdmin={ova_user.is_admin}
                   isEditable={isEditable}
                   id={candidate.id}
+                  positionId={position.id}
                 />
               );
             }
