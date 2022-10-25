@@ -16,12 +16,11 @@ import { useNavigate } from "react-router-dom";
 export interface CandidateFormData {
   name: string;
   photo: string;
-  position: string;
 }
 
 interface Props {
   onClose: MouseEventHandler<HTMLButtonElement>;
-  position: string;
+  position: number;
 }
 
 const AddCandidateForm = ({ onClose, position }: Props) => {

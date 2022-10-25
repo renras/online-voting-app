@@ -32,7 +32,7 @@ const Results = () => {
       <div className={styles.container}>
         {positions.map((position) => {
           const filteredCandidates = candidates.filter(
-            (candidate) => candidate.position === position.name
+            (candidate) => candidate.position === position.id
           );
 
           return (

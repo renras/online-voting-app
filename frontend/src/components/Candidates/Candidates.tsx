@@ -11,7 +11,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { Position } from "types/position";
 
 interface Props {
-  onAddCandidateButtonClick?: (title: string) => void;
+  onAddCandidateButtonClick?: (positionId: number) => void;
   candidates: CandidateType[];
   isEditable?: boolean;
   position: Position;
@@ -35,7 +35,7 @@ const Candidate = ({
 }: Props) => {
   const navigate = useNavigate();
   const handleAddCandidate = () => {
-    onAddCandidateButtonClick && onAddCandidateButtonClick(position.name);
+    onAddCandidateButtonClick && onAddCandidateButtonClick(position.id);
   };
 
   const ova_user = JSON.parse(`${localStorage.getItem("ova_user")}`) as User;
@@ -103,7 +103,7 @@ const Candidate = ({
   const sortPositionByVotes = (candidates: CandidateType[]) => {
     // return candidates that matches position id
     const filteredCandidates = candidates.filter(
-      (candidate) => candidate.position === position.name
+      (candidate) => candidate.position === position.id
     );
 
     return filteredCandidates.sort(rankCandidateByVotes);
@@ -135,7 +135,7 @@ const Candidate = ({
       <div className={styles.content}>
         {candidates.length > 0 &&
           candidates.map((candidate, index) => {
-            if (candidate.position === position.name) {
+            if (candidate.position === position.id) {
               return (
                 <Card
                   key={index}

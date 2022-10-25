@@ -14,7 +14,7 @@ import { Position } from "types/position";
 
 const Election = () => {
   const [isAddingPosition, setIsAddingPosition] = useState(false);
-  const [activePosition, setActivePosition] = useState<string | null>("");
+  const [activePosition, setActivePosition] = useState<number | null>(null);
   const [updatePositionId, setUpdatePositionId] = useState<number | null>(null);
 
   // fetch positions
@@ -59,8 +59,8 @@ const Election = () => {
                   key={position.id}
                   position={position}
                   candidates={candidates}
-                  onAddCandidateButtonClick={(title) =>
-                    setActivePosition(title)
+                  onAddCandidateButtonClick={(positionId) =>
+                    setActivePosition(positionId)
                   }
                   isEditable
                   onUpdatePositionClick={handleUpdatePosition}
