@@ -136,6 +136,7 @@ const Candidate = ({
                     candidate.id,
                     ova_user.id
                   )}
+                  isAdmin={ova_user.is_admin}
                 />
               );
             }

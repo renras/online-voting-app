@@ -12,6 +12,7 @@ interface Props {
   isStillAbleToVote?: boolean;
   rank?: number;
   showResults?: boolean;
+  isAdmin?: number;
 }
 
 const Card = ({
@@ -24,6 +25,7 @@ const Card = ({
   isStillAbleToVote = false,
   rank = 0,
   showResults = false,
+  isAdmin = 0,
 }: Props) => {
   // handles color depending on rank
   const getColorByRank = (rank: number) => {
@@ -62,7 +64,7 @@ const Card = ({
       </div>
       <div className={styles.content}>
         <p className={styles.name}>{name}</p>
-        {!candidateVoted && isVoting && isStillAbleToVote && (
+        {!candidateVoted && isVoting && isStillAbleToVote && isAdmin === 0 && (
           <Button
             size="small"
             theme="secondary"
