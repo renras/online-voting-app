@@ -101,39 +101,23 @@ const Candidate = ({
     return 0;
   };
 
-  // const getRankedCandidate = () => {
-  //   console.log(candidates);
-  //   const newCandidates: any = [];
+  // const sortPositionByVotes = (candidates: CandidateType[]) => {
+  //   // return candidates that matches position id
+  //   const filteredCandidates = candidates.filter(
+  //     (candidate) => candidate.position === position.id
+  //   );
 
-  //   candidates.forEach((candidate) => {
-  //     const votes = getVotes(candidate.id);
-
-  //     newCandidates.push({
-  //       candidate: candidate,
-  //       votes,
-  //     });
-  //   });
+  //   return filteredCandidates.sort(rankCandidateByVotes);
   // };
 
-  // getRankedCandidate();
+  // const getCandidateRank = (candidateId: number) => {
+  //   const sortedCandidates = sortPositionByVotes(candidates);
+  //   const candidateIndex = sortedCandidates.findIndex(
+  //     (candidate) => candidate.id === candidateId
+  //   );
 
-  const sortPositionByVotes = (candidates: CandidateType[]) => {
-    // return candidates that matches position id
-    const filteredCandidates = candidates.filter(
-      (candidate) => candidate.position === position.id
-    );
-
-    return filteredCandidates.sort(rankCandidateByVotes);
-  };
-
-  const getCandidateRank = (candidateId: number) => {
-    const sortedCandidates = sortPositionByVotes(candidates);
-    const candidateIndex = sortedCandidates.findIndex(
-      (candidate) => candidate.id === candidateId
-    );
-
-    return candidateIndex + 1;
-  };
+  //   return candidateIndex + 1;
+  // };
 
   const handleDeletePosition = async () => {
     try {
@@ -159,6 +143,47 @@ const Candidate = ({
     }
   };
 
+  type CandidatesWithRanks = {
+    id: number;
+    name: string;
+    photo: string;
+    position: number;
+    rank: number;
+    votes: number;
+  };
+
+  const getCandidatesWithRanks = () => {
+    const sortedCandidates = candidates.sort(rankCandidateByVotes);
+    const sortedCandidatesWithRankAndVotes: CandidatesWithRanks[] =
+      sortedCandidates.map((candidate) => ({
+        ...candidate,
+        votes: getVotes(candidate.id),
+        rank: -1,
+      }));
+
+    let rank = 1;
+    for (let i = 0; i < sortedCandidatesWithRankAndVotes.length; i++) {
+      if (i === 0) {
+        sortedCandidatesWithRankAndVotes[i].rank = rank;
+        continue;
+      }
+
+      if (
+        sortedCandidatesWithRankAndVotes[i].votes ===
+        sortedCandidatesWithRankAndVotes[i - 1].votes
+      ) {
+        sortedCandidatesWithRankAndVotes[i].rank = rank;
+        continue;
+      }
+
+      rank++;
+      sortedCandidatesWithRankAndVotes[i].rank = rank;
+    }
+
+    return sortedCandidatesWithRankAndVotes;
+  };
+
+  getCandidatesWithRanks();
   return (
     <div className={styles.container}>
       {showTitle && (
@@ -181,8 +206,8 @@ const Candidate = ({
         </div>
       )}
       <div className={styles.content}>
-        {candidates.length > 0 &&
-          candidates.map((candidate, index) => {
+        {getCandidatesWithRanks().length > 0 &&
+          getCandidatesWithRanks().map((candidate, index) => {
             if (candidate.position === position.id) {
               return (
                 <Card
@@ -190,7 +215,7 @@ const Candidate = ({
                   name={candidate.name}
                   photo={candidate.photo}
                   isVoting={isVoting}
-                  rank={getCandidateRank(candidate.id)}
+                  rank={candidate.rank}
                   isStillAbleToVote={isStillAbleToVote()}
                   votes={getVotes(candidate.id)}
                   onVote={() => handleVote(candidate.id, position.id)}

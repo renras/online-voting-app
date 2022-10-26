@@ -59,6 +59,7 @@ const Card = ({
   const rankToOrdinal = (rank: number) => {
     const j = rank % 10;
     const k = rank % 100;
+
     if (j === 1 && k !== 11) {
       return rank + "st";
     }
@@ -103,7 +104,10 @@ const Card = ({
 
           {showResults && (
             <div className={`${styles.rank} ${getColorByRank(rank)}`}>
-              {rankToOrdinal(rank)} Place
+              <>
+                {votes === 0 && "Unranked"}
+                {votes !== 0 && `${rankToOrdinal(rank)} Place`}
+              </>
             </div>
           )}
           {isVoting && candidateVoted && (
