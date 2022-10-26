@@ -153,6 +153,7 @@ const Candidate = ({
   };
 
   const getCandidatesWithRanks = () => {
+    if (!Array.isArray(candidates)) return [];
     const sortedCandidates = candidates.sort(rankCandidateByVotes);
     const sortedCandidatesWithRankAndVotes: CandidatesWithRanks[] =
       sortedCandidates.map((candidate) => ({
